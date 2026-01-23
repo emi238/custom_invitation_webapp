@@ -109,7 +109,7 @@ export default function InvitationCard({
                     </div>
                 ) : (
                     <div className="p-3 rounded animate-fade-in">
-                        <p className={clsx("font-medium", isAccepted ? "text-green-700" : "text-gray-600")} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontSize: 'var(--card-font-base)' }}>
+                        <p className={clsx("font-medium text-center mx-auto max-w-[260px]", isAccepted ? "text-[#4F3457]" : "text-[#4F3457]")} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontSize: 'var(--card-font-base)' }}>
                             {isAccepted ? "We look forward to seeing you!" : "See you next time!"}
                         </p>
                     </div>
