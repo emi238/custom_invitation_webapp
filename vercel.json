@@ -1,0 +1,14 @@
+{
+    "redirects": [
+        {
+            "source": "/emi",
+            "destination": "/invite/emi",
+            "permanent": true
+        },
+        {
+            "source": "/(w+)",
+            "destination": "/invite/$1",
+            "permanent": true
+        }
+    ]
+}

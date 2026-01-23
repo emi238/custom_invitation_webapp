@@ -75,7 +75,7 @@ export default function InvitationCard({
 
             <div className="space-y-2 z-10" style={{ marginTop: 'var(--button-margin-top)' }}>
                 {isPending ? (
-                    <div className="flex flex-row justify-center gap-3 px-2 w-full">
+                    <div className="flex flex-row justify-center gap-[var(--button-gap)] px-2 w-full">
                         <button
                             onClick={() => onRespond('accepted')}
                             disabled={isSubmitting}
