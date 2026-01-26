@@ -98,7 +98,7 @@ function JoinCommunitySection() {
 
 function WhatWeDoSection() {
     return (
-        <section className="relative py-24 px-6 md:px-12 overflow-hidden bg-[linear-gradient(to_bottom,#FFFFFF_0%,#E8A87C_40%)] flex flex-col justify-center">
+        <section className="relative py-24 px-4 md:px-3 overflow-hidden bg-[linear-gradient(to_bottom,#FFFFFF_0%,#E8A87C_40%)] flex flex-col justify-center">
             {/* Background Text - 3 Lines */}
             <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none select-none overflow-hidden gap-0 space-y-8">
                 {[1, 2, 3].map((i) => (
@@ -465,14 +465,14 @@ export default function HomeLanding() {
                         </h2>
                     </div>
 
-                    <div className="flex gap-12 md:gap-16 text-[#4F3457] text-lg font-medium pr-4 md:pr-12">
-                        <div className="flex flex-col gap-3">
+                    <div className="flex gap-12 md:gap-16 text-[#4F3457] text-m font-medium pr-4 md:pr-12">
+                        <div className="flex flex-col gap-1">
                             <h4 className="font-bold mb-1 text-black">Community</h4>
                             <a href="#" className="hover:opacity-70 transition-opacity">What is Hyphae?</a>
                             <a href="#" className="hover:opacity-70 transition-opacity">Who We Are</a>
                             <a href="#" className="hover:opacity-70 transition-opacity">Mission</a>
                         </div>
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-1">
                             <h4 className="font-bold mb-1 text-black">Connect</h4>
                             <a href="#events" className="hover:opacity-70 transition-opacity">Events</a>
                             <a href="#" className="hover:opacity-70 transition-opacity">Waitlist</a>
