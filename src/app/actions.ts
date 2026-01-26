@@ -1,10 +1,67 @@
 'use server'
 
-import { supabase } from '@/lib/supabase'
-import { Invitation, InvitationStatus } from '@/lib/types'
-import { revalidatePath } from 'next/cache'
+import { createClient } from '@supabase/supabase-js'
+import { InvitationStatus } from '@/lib/types'
 
-export async function getInvitation(slug: string): Promise<{ data: Invitation | null; error: string | null }> {
+// Initialize Supabase Client with Service Role Key (Server-Side Only)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+if (!supabaseUrl || !supabaseKey) {
+    console.error('Missing Supabase environment variables in actions.ts')
+}
+
+// We use a getter or simple client creation to ensure we pick up the env vars at runtime if needed.
+const getSupabase = () => createClient(supabaseUrl!, supabaseKey!)
+
+// --- Community Signups ---
+
+export async function submitCommunitySignup(email: string) {
+    const supabase = getSupabase()
+
+    try {
+        const { error } = await supabase
+            .from('community_signups')
+            .insert([{ email }])
+
+        if (error) {
+            console.error('Supabase Error (Signup):', error)
+            return { success: false, message: error.message }
+        }
+        return { success: true }
+    } catch (err) {
+        console.error('Unexpected Error (Signup):', err)
+        return { success: false, message: 'An unexpected error occurred.' }
+    }
+}
+
+// --- Events ---
+
+export async function getPublicEvents() {
+    const supabase = getSupabase()
+
+    try {
+        const { data, error } = await supabase
+            .from('events')
+            .select('*')
+            .order('created_at', { ascending: true })
+
+        if (error) {
+            console.error('Supabase Error (Get Events):', error)
+            return []
+        }
+        return data || []
+    } catch (err) {
+        console.error('Unexpected Error (Get Events):', err)
+        return []
+    }
+}
+
+// --- Invitations ---
+
+export async function getInvitation(slug: string) {
+    const supabase = getSupabase()
+
     try {
         const { data, error } = await supabase
             .from('invitations')
@@ -12,63 +69,16 @@ export async function getInvitation(slug: string): Promise<{ data: Invitation | 
             .eq('slug', slug)
             .single()
 
-        if (error) {
-            // Extract error properties explicitly to avoid serialization issues
-            const errorInfo = {
-                message: error.message || 'Unknown error',
-                code: error.code || 'NO_CODE',
-                details: error.details || null,
-                hint: error.hint || null
-            }
-            console.error(`[getInvitation] Supabase error for slug "${slug}":`, JSON.stringify(errorInfo, null, 2))
-            return { data: null, error: errorInfo.message }
-        }
-
-        if (!data) {
-            console.error(`[getInvitation] No data returned for slug: "${slug}"`)
-            return { data: null, error: 'Invitation not found' }
-        }
-
-        return { data: data as Invitation, error: null }
-    } catch (err) {
-        // Handle non-Supabase errors (network, etc.)
-        const errorMessage = err instanceof Error ? err.message : String(err)
-        const errorName = err instanceof Error ? err.name : 'UnknownError'
-        
-        console.error(`[getInvitation] Exception for slug "${slug}":`, errorName, errorMessage)
-        
-        return { data: null, error: errorMessage || 'Failed to fetch invitation' }
-    }
-}
-
-export async function markAsOpened(slug: string) {
-    try {
-        await supabase
-            .from('invitations')
-            .update({ opened_at: new Date().toISOString() })
-            .eq('slug', slug)
-            .is('opened_at', null) // Only update if not already opened? Optional.
-    } catch (err) {
-        console.error('Error marking as opened:', err)
+        return { data, error }
+    } catch (error) {
+        return { data: null, error }
     }
 }
 
 export async function respondToInvitation(slug: string, status: InvitationStatus) {
-    if (status === 'pending') return { error: 'Invalid status' }
+    const supabase = getSupabase()
 
     try {
-        // Check if already responded
-        const { data: existing } = await supabase
-            .from('invitations')
-            .select('status')
-            .eq('slug', slug)
-            .single()
-
-        if (!existing) return { error: 'Invitation not found' }
-        if (existing.status !== 'pending') {
-            return { error: 'You have already responded to this invitation.' }
-        }
-
         const { error } = await supabase
             .from('invitations')
             .update({
@@ -78,11 +88,29 @@ export async function respondToInvitation(slug: string, status: InvitationStatus
             .eq('slug', slug)
 
         if (error) throw error
-
-        revalidatePath(`/invite/${slug}`)
         return { success: true }
-    } catch (err) {
-        console.error('Error responding:', err)
-        return { error: 'Failed to submit response' }
+    } catch (error: any) {
+        console.error('Error responding to invitation:', error)
+        return { success: false, error: error.message }
+    }
+}
+
+export async function markAsOpened(slug: string) {
+    const supabase = getSupabase()
+
+    try {
+        // Only mark as opened if not already opened? Logic is usually fine to overwrite or check first.
+        // For simplicity, just update opened_at if it's null, but SQL update is easier.
+        const { error } = await supabase
+            .from('invitations')
+            .update({ opened_at: new Date().toISOString() })
+            .eq('slug', slug)
+            .is('opened_at', null) // Only update if currently null
+
+        if (error) throw error
+        return { success: true }
+    } catch (error: any) {
+        console.error('Error marking as opened:', error)
+        return { success: false, error: error.message }
     }
 }

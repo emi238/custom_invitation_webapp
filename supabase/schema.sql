@@ -34,3 +34,39 @@ using (true);
 
 -- Only service role can update, or maybe we allow update via a function?
 -- Let's stick to Server Actions updating via Service Role Key (easiest for "one time" logic enforcement).
+
+-- Create a table for community signups
+create table public.community_signups (
+  id uuid default gen_random_uuid() primary key,
+  email text not null,
+  created_at timestamptz default now()
+);
+
+-- Enable RLS
+alter table public.community_signups enable row level security;
+
+-- Allow public inserts (anyone can sign up)
+create policy "Allow public insert to community_signups"
+on public.community_signups
+for insert
+with check (true);
+
+-- Create a table for public events
+create table public.events (
+  id uuid default gen_random_uuid() primary key,
+  title text not null,
+  description text,
+  location text,
+  status text default 'coming soon...',
+  created_at timestamptz default now()
+);
+
+-- Enable RLS
+alter table public.events enable row level security;
+
+-- Allow public read access
+create policy "Allow public read access to events"
+on public.events
+for select
+using (true);
+EOF
