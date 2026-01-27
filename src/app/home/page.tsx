@@ -4,6 +4,7 @@ import React, { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Calendar, Users, Heart, Infinity } from 'lucide-react'
 import { submitCommunitySignup, getPublicEvents } from '../actions'
+import Link from 'next/link'
 
 // Define fonts in a safe way if variables aren't perfect, but we successfully added them in layout.
 const serifFont = 'var(--font-playfair-display), serif'
@@ -409,7 +410,7 @@ export default function HomeLanding() {
         <div className="min-h-screen w-full overflow-x-hidden font-sans text-stone-800 bg-[#FFF5EB]">
             {/* Navigation */}
             <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-white/20 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300">
-                <div className="text-xl font-bold tracking-tight text-[#5e4175]">HYPHAE</div>
+                <Link href="/home" className="text-xl font-bold tracking-tight text-[#5e4175]">HYPHAE</Link>
                 <div className="flex items-center gap-6 text-[#5e4175] font-medium text-sm">
                     <a href="#events" onClick={(e) => smoothScrollTo(e, 'events')} className="hover:opacity-70 transition-opacity">events</a>
                     <a href="#" className="hover:opacity-70 transition-opacity">community board</a>
@@ -462,8 +463,9 @@ export default function HomeLanding() {
                         >
                             join us
                         </a>
-                        <button
-                            className="px-8 py-3 rounded-full font-semibold border-2 transition-colors hover:bg-[#71588A]/5"
+                        <Link
+                            href="/manifesto"
+                            className="px-8 py-3 rounded-full font-semibold border-2 transition-colors hover:bg-[#71588A]/5 flex items-center justify-center"
                             style={{
                                 borderColor: '#71588A',
                                 color: '#71588A',
@@ -471,7 +473,7 @@ export default function HomeLanding() {
                             }}
                         >
                             our founding manifesto
-                        </button>
+                        </Link>
                     </div>
                 </motion.div>
 
