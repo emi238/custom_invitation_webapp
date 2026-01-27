@@ -114,3 +114,45 @@ export async function markAsOpened(slug: string) {
         return { success: false, error: error.message }
     }
 }
+
+// --- Community Board ---
+
+export async function getPosts(type: 'internship' | 'cofounder' | 'event') {
+    const supabase = getSupabase()
+
+    try {
+        const { data, error } = await supabase
+            .from('board_posts')
+            .select('*')
+            .eq('type', type)
+            .order('created_at', { ascending: false })
+
+        if (error) {
+            console.error(`Supabase Error (Get ${type}):`, error)
+            return []
+        }
+        return data || []
+    } catch (err) {
+        console.error(`Unexpected Error (Get ${type}):`, err)
+        return []
+    }
+}
+
+export async function createPost(type: 'internship' | 'cofounder' | 'event', content: any) {
+    const supabase = getSupabase()
+
+    try {
+        const { error } = await supabase
+            .from('board_posts')
+            .insert([{ type, ...content }])
+
+        if (error) {
+            console.error(`Supabase Error (Create ${type}):`, error)
+            return { success: false, message: error.message }
+        }
+        return { success: true }
+    } catch (err) {
+        console.error(`Unexpected Error (Create ${type}):`, err)
+        return { success: false, message: 'An unexpected error occurred.' }
+    }
+}

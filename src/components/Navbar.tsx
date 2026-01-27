@@ -68,7 +68,7 @@ export default function Navbar({ theme = 'light' }: NavbarProps) {
 
     const navLinks = [
         { name: 'events', href: '/home#events', id: '#events' },
-        { name: 'community board', href: '/home', id: null }, // distinct behavior?
+        { name: 'community board', href: '/board', id: null },
         { name: 'join us', href: '/home#join', id: '#join' },
     ]
 

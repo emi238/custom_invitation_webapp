@@ -113,7 +113,7 @@ export default function ManifestoPage() {
             </div>
 
             {/* Background Flower */}
-            <div className="fixed inset-0 w-full h-full pointer-events-none z-0 flex items-center justify-center opacity-20">
+            <div className="fixed inset-0 w-full h-full pointer-events-none z-0 flex items-center justify-center opacity-15">
                 <img
                     src="/flower-decor.png"
                     alt=""
