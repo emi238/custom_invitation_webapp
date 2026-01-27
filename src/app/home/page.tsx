@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, Users, Heart, Infinity } from 'lucide-react'
 import { submitCommunitySignup, getPublicEvents } from '../actions'
 import Link from 'next/link'
 import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 
 // Define fonts in a safe way if variables aren't perfect, but we successfully added them in layout.
 const serifFont = 'var(--font-playfair-display), serif'
@@ -100,7 +101,7 @@ function JoinCommunitySection() {
 
 function WhatWeDoSection() {
     return (
-        <section className="relative py-24 px-4 md:px-3 overflow-hidden bg-[linear-gradient(to_bottom,#FFFFFF_0%,#E8A87C_40%)] flex flex-col justify-center">
+        <section id="what-we-do" className="scroll-mt-28 relative py-24 px-4 md:px-3 overflow-hidden bg-[linear-gradient(to_bottom,#FFFFFF_0%,#E8A87C_40%)] flex flex-col justify-center">
             {/* Background Text - 3 Lines */}
             <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none select-none overflow-hidden gap-0 space-y-8">
                 {[1, 2, 3].map((i) => (
@@ -171,10 +172,10 @@ function WhatWeDoSection() {
 
 function MissionSection() {
     return (
-        <div className="bg-[#462E61] text-white selection:bg-[#E8A87C] selection:text-[#462E61] relative z-20">
+        <div id="mission" className="scroll-mt-28 bg-[#462E61] text-white selection:bg-[#E8A87C] selection:text-[#462E61] relative z-20">
 
             {/* STATIC CONTENT: Who We Are */}
-            <div className="min-h-screen container mx-auto px-6 md:px-12 py-24 flex flex-col justify-center">
+            <div id="definition" className="min-h-screen container mx-auto px-6 md:px-12 py-24 flex flex-col justify-center">
 
                 {/* Top Row: Definition & Who We Are */}
                 <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-24 mb-12">
@@ -246,7 +247,7 @@ function MissionSection() {
             </div>
 
             {/* Part 1: MISSION SECTION (Static Block) */}
-            <div className="relative min-h-screen w-full flex items-center justify-center p-6 overflow-hidden">
+            <div id="our-mission" className="relative min-h-screen w-full flex items-center justify-center p-6 overflow-hidden">
                 {/* Flower Decor (Top Center) */}
                 <div className="absolute top-0 md:top-[10%] left-0 right-0 flex justify-center opacity-30 pointer-events-none">
                     <img src="/flower-decor.png" alt="" className="w-[80vw] md:w-auto md:max-h-[50vh] object-contain opacity-60 mix-blend-screen" />
@@ -488,33 +489,8 @@ export default function HomeLanding() {
             <JoinCommunitySection />
 
             {/* Footer */}
-            <footer className="py-8 px-4 bg-[#C2A2CE] overflow-hidden">
-                <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
-                    <div className="flex-1">
-                        <h2
-                            className="text-8xl md:text-[7rem] font-bold tracking-tighter leading-none"
-                            style={{ fontFamily: sansFont, color: '#4F3457' }}
-                        >
-                            HYPHAE
-                        </h2>
-                    </div>
-
-                    <div className="flex gap-12 md:gap-16 text-[#4F3457] text-m font-medium pr-4 md:pr-12">
-                        <div className="flex flex-col gap-1">
-                            <h4 className="font-bold mb-1 text-black">Community</h4>
-                            <a href="#" className="hover:opacity-70 transition-opacity">What is Hyphae?</a>
-                            <a href="#" className="hover:opacity-70 transition-opacity">Who We Are</a>
-                            <a href="#" className="hover:opacity-70 transition-opacity">Mission</a>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                            <h4 className="font-bold mb-1 text-black">Connect</h4>
-                            <a href="#events" className="hover:opacity-70 transition-opacity">Events</a>
-                            <a href="#" className="hover:opacity-70 transition-opacity">Waitlist</a>
-                            <a href="#" className="hover:opacity-70 transition-opacity">Contact</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            {/* Footer */}
+            <Footer />
         </div >
     )
 }

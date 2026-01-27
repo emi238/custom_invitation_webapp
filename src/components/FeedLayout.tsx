@@ -16,9 +16,10 @@ interface FeedLayoutProps {
     posts: Post[]
     type?: 'internship' | 'cofounder' | 'event'
     showAddButton?: boolean
+    children?: React.ReactNode
 }
 
-export default function FeedLayout({ title, posts, type, showAddButton = true }: FeedLayoutProps) {
+export default function FeedLayout({ title, posts, type, showAddButton = true, children }: FeedLayoutProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     // Filler content if no posts
@@ -50,6 +51,8 @@ export default function FeedLayout({ title, posts, type, showAddButton = true }:
 
             {/* Posts Feed */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 scrollbar-hide">
+                {children}
+
                 {posts.length === 0 && (
                     <div className="mb-8 p-4 bg-[#E8A87C]/10 rounded-xl border border-[#E8A87C]/20 text-[#4F3457]/80 text-sm italic text-center">
                         No posts yet. Examples shown below.

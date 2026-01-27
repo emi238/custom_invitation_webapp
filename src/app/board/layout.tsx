@@ -23,8 +23,6 @@ export default function BoardLayout({ children }: { children: React.ReactNode })
                 <section className="flex-1 h-full min-h-0">
                     {children}
                 </section>
-
-                {/* Right Sidebar removed as requested */}
             </main>
         </div>
     )

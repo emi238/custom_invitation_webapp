@@ -4,7 +4,12 @@ import React, { useRef } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+
+
+
+
 import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 
 const sansFont = 'var(--font-dm-sans), sans-serif'
 const serifFont = 'var(--font-playfair-display), serif'
@@ -140,6 +145,8 @@ export default function ManifestoPage() {
             <div className="fixed bottom-8 left-0 right-0 flex justify-center z-50 pointer-events-none opacity-20">
                 <div className="w-[1px] h-24 bg-gradient-to-b from-transparent via-white to-transparent"></div>
             </div>
+
+            <Footer />
         </main>
     )
 }
