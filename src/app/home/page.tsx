@@ -392,6 +392,7 @@ export default function HomeLanding() {
                         backgroundImage: "url('/hero-background.png')",
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
+                        backgroundColor: '#FFF5EB', // Fallback color
                         opacity: 0.8
                     }}
                 />
