@@ -4,6 +4,7 @@ import React, { useRef } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import Navbar from '../../components/Navbar'
 
 const sansFont = 'var(--font-dm-sans), sans-serif'
 const serifFont = 'var(--font-playfair-display), serif'
@@ -98,14 +99,7 @@ export default function ManifestoPage() {
         <main className="min-h-screen bg-[#462E61] text-[#E8A87C] overflow-x-hidden selection:bg-[#E8A87C] selection:text-[#462E61]">
             {/* Nav / Back Button */}
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-[#462E61]/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300">
-                <Link href="/home" className="text-xl font-bold tracking-tight text-[#E8A87C]">HYPHAE</Link>
-                <div className="flex items-center gap-6 text-[#E8A87C] font-medium text-sm">
-                    <Link href="/home#events" className="hover:opacity-70 transition-opacity">events</Link>
-                    <Link href="/home" className="hover:opacity-70 transition-opacity">community board</Link>
-                    <Link href="/home#join" className="hover:opacity-70 transition-opacity">join us</Link>
-                </div>
-            </nav>
+            <Navbar theme="dark" />
 
             {/* Back to Home Button */}
             <Link href="/home" className="fixed top-20 left-8 z-40 flex items-center gap-2 text-[#E8A87C]/50 hover:text-[#E8A87C] transition-colors">

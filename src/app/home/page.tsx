@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Calendar, Users, Heart, Infinity } from 'lucide-react'
 import { submitCommunitySignup, getPublicEvents } from '../actions'
 import Link from 'next/link'
+import Navbar from '../../components/Navbar'
 
 // Define fonts in a safe way if variables aren't perfect, but we successfully added them in layout.
 const serifFont = 'var(--font-playfair-display), serif'
@@ -193,7 +194,7 @@ function MissionSection() {
 
                     {/* Right: Who We Are - Stepped Down */}
                     <div className="flex-1 max-w-xl text-right md:text-right mt-12 md:mt-32">
-                        <h3 className="text-5xl md:text-7xl font-bold mb-8 opacity-80" style={{ fontFamily: sansFont, color: '#8C6997' }}>
+                        <h3 className="text-5xl md:text-7xl font-bold mb-8 opacity-80" style={{ fontFamily: sansFont, color: '#E8A87C' }}>
                             who we are
                         </h3>
                         <p className="text-lg md:text-xl leading-relaxed" style={{ color: '#E6DCD7' }}>
@@ -409,14 +410,8 @@ export default function HomeLanding() {
     return (
         <div className="min-h-screen w-full overflow-x-hidden font-sans text-stone-800 bg-[#FFF5EB]">
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-white/20 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300">
-                <Link href="/home" className="text-xl font-bold tracking-tight text-[#5e4175]">HYPHAE</Link>
-                <div className="flex items-center gap-6 text-[#5e4175] font-medium text-sm">
-                    <a href="#events" onClick={(e) => smoothScrollTo(e, 'events')} className="hover:opacity-70 transition-opacity">events</a>
-                    <a href="#" className="hover:opacity-70 transition-opacity">community board</a>
-                    <a href="#join" onClick={(e) => smoothScrollTo(e, 'join')} className="hover:opacity-70 transition-opacity">join us</a>
-                </div>
-            </nav>
+            {/* Navigation */}
+            <Navbar theme="light" />
 
             {/* Hero Section */}
             <section className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center overflow-hidden">
