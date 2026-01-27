@@ -125,6 +125,16 @@ export default function ManifestoPage() {
                 {manifestoText.map((text, i) => (
                     <ManifestoItem key={i} text={text} index={i} />
                 ))}
+
+                {/* Final Call to Action */}
+                <div className="min-h-[50vh] flex flex-col items-center justify-center p-6 gap-8">
+                    <Link
+                        href="/home#join"
+                        className="px-8 py-4 rounded-full font-bold text-[#462E61] bg-[#E8A87C] hover:bg-[#F0C09D] transition-all transform hover:scale-105 shadow-xl text-lg tracking-wide"
+                    >
+                        Join the Community
+                    </Link>
+                </div>
             </div>
 
             <div className="fixed bottom-8 left-0 right-0 flex justify-center z-50 pointer-events-none opacity-20">
