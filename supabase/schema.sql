@@ -69,4 +69,3 @@ create policy "Allow public read access to events"
 on public.events
 for select
 using (true);
-EOF

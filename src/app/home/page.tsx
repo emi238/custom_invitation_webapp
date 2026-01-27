@@ -41,7 +41,7 @@ function JoinCommunitySection() {
     }
 
     return (
-        <section id="join" className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+        <section id="join" className="scroll-mt-28 relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
             {/* Background Image */}
             <div
                 className="absolute inset-0 w-full h-full z-0 pointer-events-none"
@@ -317,13 +317,13 @@ function EventsSection() {
 
     // Fallback/Placeholder if no events in DB yet (so design doesn't break for user immediately)
     const displayEvents = events.length > 0 ? events : [
-        { id: '1', title: 'Founder Dinner #1', description: 'Intimate gathering of young founders across Brisbane. Bring your story, take home new friends and connections.', location: 'Brisbane', status: 'coming soon...' },
-        { id: '2', title: 'Startups & Sunday Run', description: 'Join us for a casual 5k run along the river followed by coffee and chat.', location: 'New Farm Park', status: 'coming soon...' },
-        { id: '3', title: 'Pitch Night', description: 'Practice your pitch in a safe environment with constructive feedback.', location: 'The Precinct', status: 'coming soon...' }
+        { id: '1', title: 'Founder Dinner #1', description: 'Intimate gathering of young founders across Brisbane. Bring your story, take home new friends and connections.', location: 'Brisbane', status: '29th of Janurary' },
+        { id: '2', title: 'Event #2', description: 'More to come', location: 'Brisbane', status: 'coming soon...' },
+        { id: '3', title: 'Event #3', description: 'More to come', location: 'Brisbane', status: 'coming soon...' }
     ]
 
     return (
-        <section id="events" className="scroll-mt-32 py-24 px-6 md:px-12 bg-gradient-to-b from-[#3D2654] to-[#8754BA] min-h-screen relative overflow-hidden">
+        <section id="events" className="scroll-mt-28 py-24 px-6 md:px-12 bg-gradient-to-b from-[#3D2654] to-[#8754BA] min-h-screen relative overflow-hidden">
             {/* Background Botanical */}
             <div className="absolute right-[5%] top-1/2 -translate-y-1/2 h-[90%] w-auto aspect-square pointer-events-none opacity-40 mix-blend-multiply md:mix-blend-normal md:opacity-100">
                 <img
@@ -371,15 +371,49 @@ function EventsSection() {
 }
 
 export default function HomeLanding() {
+    const smoothScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+        e.preventDefault()
+        const element = document.getElementById(id)
+        if (!element) return
+
+        // Align the bottom of the section to the bottom of the viewport
+        const elementRect = element.getBoundingClientRect()
+        const elementBottom = elementRect.bottom + window.scrollY
+        const offsetPosition = elementBottom - window.innerHeight
+
+        const startPosition = window.scrollY
+        const distance = offsetPosition - startPosition
+        const duration = 1500 // Slower duration in ms
+        let start: number | null = null
+
+        const animation = (currentTime: number) => {
+            if (start === null) start = currentTime
+            const timeElapsed = currentTime - start
+            const run = ease(timeElapsed, startPosition, distance, duration)
+            window.scrollTo(0, run)
+            if (timeElapsed < duration) requestAnimationFrame(animation)
+        }
+
+        // Ease in-out quadratic function
+        const ease = (t: number, b: number, c: number, d: number) => {
+            t /= d / 2
+            if (t < 1) return (c / 2) * t * t + b
+            t--
+            return (-c / 2) * (t * (t - 2) - 1) + b
+        }
+
+        requestAnimationFrame(animation)
+    }
+
     return (
         <div className="min-h-screen w-full overflow-x-hidden font-sans text-stone-800 bg-[#FFF5EB]">
             {/* Navigation */}
             <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-white/20 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300">
                 <div className="text-xl font-bold tracking-tight text-[#5e4175]">HYPHAE</div>
                 <div className="flex items-center gap-6 text-[#5e4175] font-medium text-sm">
-                    <a href="#events" className="hover:opacity-70 transition-opacity">events</a>
+                    <a href="#events" onClick={(e) => smoothScrollTo(e, 'events')} className="hover:opacity-70 transition-opacity">events</a>
                     <a href="#" className="hover:opacity-70 transition-opacity">community board</a>
-                    <a href="#join" className="hover:opacity-70 transition-opacity">join us</a>
+                    <a href="#join" onClick={(e) => smoothScrollTo(e, 'join')} className="hover:opacity-70 transition-opacity">join us</a>
                 </div>
             </nav>
 
@@ -402,30 +436,32 @@ export default function HomeLanding() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="relative z-10 max-w-5xl mx-auto mt-20 flex flex-col items-center gap-6"
+                    className="relative z-10 max-w-5xl mx-auto mt-20 flex flex-col items-center gap-1"
                 >
                     <h1
-                        className="text-5xl md:text-7xl font-bold mb-2 tracking-tight"
+                        className="text-[35px] md:text-[67px] font-bold tracking-tighter leading-none"
                         style={{ fontFamily: sansFont, color: '#71588A' }}
                     >
                         Everyone celebrates unicorns.
                     </h1>
                     <p
-                        className="text-2xl md:text-4xl font-medium leading-relaxed max-w-4xl mx-auto"
+                        className="text-[19px] md:text-[30px] font-medium tracking-tight leading-tight max-w-4xl mx-auto"
                         style={{ color: '#E8A87C' }}
                     >
                         No one talks about the network that grows underneath.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
-                        <button
+                        <a
+                            href="#join"
+                            onClick={(e) => smoothScrollTo(e, 'join')}
                             className="px-8 py-3 rounded-full font-semibold text-white transition-colors shadow-lg hover:shadow-xl transform active:scale-95 duration-200"
                             style={{ backgroundColor: '#71588A' }}
                             onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#9784AB'}
                             onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#71588A'}
                         >
                             join us
-                        </button>
+                        </a>
                         <button
                             className="px-8 py-3 rounded-full font-semibold border-2 transition-colors hover:bg-[#71588A]/5"
                             style={{
