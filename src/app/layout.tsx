@@ -17,6 +17,11 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   title: "Hyphae",
   description: "Join the community",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/favicon.ico",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
