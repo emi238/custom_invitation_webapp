@@ -166,3 +166,15 @@ body {
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* Global Scrollbar Hide */
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
