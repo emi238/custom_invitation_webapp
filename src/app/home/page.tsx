@@ -321,8 +321,8 @@ function EventsSection() {
     // Fallback/Placeholder if no events in DB yet (so design doesn't break for user immediately)
     const displayEvents = events.length > 0 ? events : [
         { id: '1', title: 'Founder Dinner #1', description: 'Intimate gathering of young founders across Brisbane. Bring your story, take home new friends and connections.', location: 'Brisbane', status: '29th of Janurary' },
-        { id: '2', title: 'Event #2', description: 'More to come', location: 'Brisbane', status: 'coming soon...' },
-        { id: '3', title: 'Event #3', description: 'More to come', location: 'Brisbane', status: 'coming soon...' }
+        { id: '2', title: 'Event #2', description: 'Keep an eye out!', location: 'Brisbane', status: 'coming soon...' },
+        { id: '3', title: 'Event #3', description: 'Keep an eye out!', location: 'Brisbane', status: 'coming soon...' }
     ]
 
     return (

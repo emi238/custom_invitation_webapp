@@ -8,7 +8,7 @@ export default async function EventsPage() {
 
     return (
         <FeedLayout
-            title="Ecosystem Events"
+            title="ecosystem events"
             posts={posts}
             type="event"
         />

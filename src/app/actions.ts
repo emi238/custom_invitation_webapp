@@ -117,21 +117,53 @@ export async function markAsOpened(slug: string) {
 
 // --- Community Board ---
 
+// ... existing methods ...
+
+// --- Community Board ---
+
 export async function getPosts(type: 'internship' | 'cofounder' | 'event') {
     const supabase = getSupabase()
 
     try {
-        const { data, error } = await supabase
-            .from('board_posts')
-            .select('*')
-            .eq('type', type)
-            .order('created_at', { ascending: false })
+        if (type === 'internship') {
+            const { data, error } = await supabase
+                .from('internship_posts')
+                .select(`
+                    *,
+                    roles:internship_roles(*)
+                `)
+                .order('created_at', { ascending: false })
 
-        if (error) {
-            console.error(`Supabase Error (Get ${type}):`, error)
-            return []
+            if (error) {
+                console.error('Supabase Error (Get Internships):', error)
+                return []
+            }
+            return data || []
+        } else if (type === 'cofounder') {
+            const { data, error } = await supabase
+                .from('cofounder_posts')
+                .select('*')
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error('Supabase Error (Get Cofounders):', error)
+                return []
+            }
+            return data || []
+        } else {
+            const { data, error } = await supabase
+                .from('board_posts')
+                .select('*')
+                .eq('type', type)
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error(`Supabase Error (Get ${type}):`, error)
+                return []
+            }
+            return data || []
         }
-        return data || []
+
     } catch (err) {
         console.error(`Unexpected Error (Get ${type}):`, err)
         return []
@@ -142,17 +174,106 @@ export async function createPost(type: 'internship' | 'cofounder' | 'event', con
     const supabase = getSupabase()
 
     try {
-        const { error } = await supabase
-            .from('board_posts')
-            .insert([{ type, ...content }])
+        if (type === 'internship') {
+            // ... existing internship logic ...
+            const { roles, ...postData } = content
+            const { data: post, error: postError } = await supabase
+                .from('internship_posts')
+                .insert([postData])
+                .select()
+                .single()
 
-        if (error) {
-            console.error(`Supabase Error (Create ${type}):`, error)
-            return { success: false, message: error.message }
+            if (postError) throw postError
+
+            if (roles && roles.length > 0) {
+                const rolesWithId = roles.map((r: any) => ({
+                    ...r,
+                    internship_id: post.id
+                }))
+                const { error: rolesError } = await supabase
+                    .from('internship_roles')
+                    .insert(rolesWithId)
+                if (rolesError) throw rolesError
+            }
+            return { success: true }
+
+        } else if (type === 'cofounder') {
+            const { error } = await supabase
+                .from('cofounder_posts')
+                .insert([content])
+
+            if (error) {
+                console.error('Supabase Error (Create Cofounder):', error)
+                return { success: false, message: error.message }
+            }
+            return { success: true }
+
+        } else {
+            const { error } = await supabase
+                .from('board_posts')
+                .insert([{ type, ...content }])
+
+            if (error) {
+                console.error(`Supabase Error (Create ${type}):`, error)
+                return { success: false, message: error.message }
+            }
+            return { success: true }
         }
-        return { success: true }
-    } catch (err) {
+        // ... existing createPost ...
+    } catch (err: any) {
         console.error(`Unexpected Error (Create ${type}):`, err)
-        return { success: false, message: 'An unexpected error occurred.' }
+        return { success: false, message: err.message || 'An unexpected error occurred.' }
+    }
+}
+
+export async function getCofounderPost(slug: string) {
+    const supabase = getSupabase()
+
+    try {
+        const { data, error } = await supabase
+            .from('cofounder_posts')
+            .select('*')
+            .eq('slug', slug)
+            .single()
+
+        return { data, error }
+    } catch (error) {
+        console.error('Unexpected Error (Get Cofounder Post):', error)
+        return { data: null, error }
+    }
+}
+
+// --- Storage ---
+
+export async function uploadFile(formData: FormData) {
+    const supabase = getSupabase()
+    const file = formData.get('file') as File
+
+    if (!file) {
+        return { success: false, message: 'No file provided' }
+    }
+
+    try {
+        const fileExt = file.name.split('.').pop()
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+        const filePath = `${fileName}`
+
+        const { error: uploadError } = await supabase.storage
+            .from('board-uploads')
+            .upload(filePath, file)
+
+        if (uploadError) {
+            console.error('Supabase Storage Error:', uploadError)
+            return { success: false, message: uploadError.message }
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+            .from('board-uploads')
+            .getPublicUrl(filePath)
+
+        return { success: true, url: publicUrl }
+    } catch (error: any) {
+        console.error('Upload Error:', error)
+        return { success: false, message: error.message || 'Upload failed' }
     }
 }

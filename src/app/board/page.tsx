@@ -8,7 +8,7 @@ export default function BoardHomePage() {
 
     return (
         <FeedLayout
-            title="Home Feed"
+            title="home feed"
             posts={[]}
             showAddButton={false}
         />

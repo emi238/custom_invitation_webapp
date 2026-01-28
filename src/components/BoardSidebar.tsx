@@ -2,13 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Briefcase, Users, Calendar } from 'lucide-react'
+import { Home, Briefcase, Users, Calendar, Sparkles } from 'lucide-react'
 
 const navItems = [
-    { name: 'Home', href: '/board', icon: Home },
-    { name: 'Internships', href: '/board/internships', icon: Briefcase },
-    { name: 'Find a Co-founder', href: '/board/co-founder', icon: Users },
-    { name: 'Ecosystem Events', href: '/board/events', icon: Calendar },
+    { name: 'home', href: '/board', icon: Home },
+    { name: 'internships', href: '/board/internships', icon: Briefcase },
+    { name: 'find a co-founder', href: '/board/co-founder', icon: Users },
+    { name: 'founder spotlights', href: '/board/spotlights', icon: Sparkles },
+    { name: 'ecosystem events', href: '/board/events', icon: Calendar },
 ]
 
 export default function BoardSidebar() {

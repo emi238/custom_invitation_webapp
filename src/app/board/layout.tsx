@@ -5,11 +5,11 @@ export default function BoardLayout({ children }: { children: React.ReactNode })
     return (
         <div className="min-h-screen bg-[#FFF5EB] font-sans text-[#4F3457] flex flex-col overflow-hidden">
             {/* Background Assets */}
-            <div className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-10">
+            <div className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-40 mix-blend-multiply bg-[#4F3457]/10">
                 <img
                     src="/hero-background.png"
                     alt=""
-                    className="w-full h-full object-cover grayscale opacity-20"
+                    className="w-full h-full object-cover"
                 />
             </div>
 
