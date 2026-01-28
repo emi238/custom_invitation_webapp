@@ -7,7 +7,7 @@ export default function BoardLayout({ children }: { children: React.ReactNode })
             {/* Background Assets */}
             <div className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-40 mix-blend-multiply bg-[#4F3457]/10">
                 <img
-                    src="/hero-background.png"
+                    src="/community-background.png"
                     alt=""
                     className="w-full h-full object-cover"
                 />
