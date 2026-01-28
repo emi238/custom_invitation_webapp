@@ -40,3 +40,17 @@ export interface InternshipPost {
     contact_details: string
     roles: InternshipRole[]
 }
+
+export interface CofounderPost {
+    id: string
+    created_at: string
+    slug: string
+    startup_name: string
+    logo_image: string
+    banner_image: string
+    position_title: string
+    description: string
+    extended_description: string
+    industry_tags: string[]
+    founder_email: string
+}

@@ -69,7 +69,7 @@ export default function CreateCofounderForm({ onSuccess, onCancel }: CreateCofou
                             value={formData.startup_name}
                             onChange={e => setFormData({ ...formData, startup_name: e.target.value })}
                             className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#E8A87C] focus:bg-black/30 transition-all font-medium"
-                            placeholder="e.g. Acme AI"
+                            placeholder="e.g. startup name"
                         />
                     </div>
                     <div className="group">
@@ -91,7 +91,7 @@ export default function CreateCofounderForm({ onSuccess, onCancel }: CreateCofou
                         value={formData.industry_tags}
                         onChange={e => setFormData({ ...formData, industry_tags: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#E8A87C] focus:bg-black/30 transition-all font-medium"
-                        placeholder="e.g. HealthTech, AI, B2B"
+                        placeholder="e.g. HealthTech, AI, SaaS"
                     />
                 </div>
 
@@ -124,26 +124,26 @@ export default function CreateCofounderForm({ onSuccess, onCancel }: CreateCofou
                 </div>
 
                 <div className="group">
-                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider group-focus-within:text-[#E8A87C] transition-colors">Short Description (Card View) <span className="text-red-400">*</span></label>
+                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider group-focus-within:text-[#E8A87C] transition-colors">Short Description<span className="text-red-400">*</span></label>
                     <textarea
                         required
                         value={formData.description}
                         onChange={e => setFormData({ ...formData, description: e.target.value })}
                         rows={3}
                         className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#E8A87C] focus:bg-black/30 transition-all font-medium resize-none leading-relaxed"
-                        placeholder="Brief overview for the main board..."
+                        placeholder="what your startup does..."
                     />
                 </div>
 
                 <div className="group">
-                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider group-focus-within:text-[#E8A87C] transition-colors">Extended Description (Detail View - Markdown Supported) <span className="text-red-400">*</span></label>
+                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider group-focus-within:text-[#E8A87C] transition-colors">Role Description<span className="text-red-400">*</span></label>
                     <textarea
                         required
                         value={formData.extended_description}
                         onChange={e => setFormData({ ...formData, extended_description: e.target.value })}
                         rows={8}
-                        className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#E8A87C] focus:bg-black/30 transition-all font-medium resize-none leading-relaxed font-mono text-sm"
-                        placeholder="Full details about the role, vision, requirements..."
+                        className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#E8A87C] focus:bg-black/30 transition-all font-medium resize-none leading-relaxed"
+                        placeholder="spill what skills, attributes, vibes you are looking for!"
                     />
                 </div>
             </div>

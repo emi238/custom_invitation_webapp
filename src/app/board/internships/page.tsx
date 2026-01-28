@@ -7,51 +7,6 @@ import { InternshipPost } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
-const examplePosts: InternshipPost[] = [
-    {
-        id: '1',
-        slug: 'ubiquiart',
-        startup_name: 'Ubiquiart',
-        startup_icon: 'https://api.dicebear.com/7.x/identicon/svg?seed=ubiquiart',
-        banner_image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1000',
-        description: 'We are building a music licensing marketplace that connects filmmakers with artists worldwide, unlocking opportunities for independent artists and making music sync licensing faster, simpler and more transparent.',
-        is_paid: false,
-        message_from_founder: "We are passionate about music and film. Join us to revolutionize the industry!",
-        founder_signature_photo: '/signature.jpeg',
-        contact_details: 'apply@ubiquiart.com',
-        roles: [],
-        created_at: new Date().toISOString()
-    },
-    {
-        id: '2',
-        slug: 'ecoflow',
-        startup_name: 'EcoFlow',
-        startup_icon: 'https://api.dicebear.com/7.x/identicon/svg?seed=ecoflow',
-        banner_image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000',
-        description: 'Revolutionizing urban gardening with smart, IoT-enabled vertical farming solutions for residential buildings.',
-        is_paid: true,
-        message_from_founder: '',
-        founder_signature_photo: '',
-        contact_details: '',
-        roles: [],
-        created_at: new Date().toISOString()
-    },
-    {
-        id: '3',
-        slug: 'health-ai',
-        startup_name: 'HealthAI',
-        startup_icon: 'https://api.dicebear.com/7.x/identicon/svg?seed=healthai',
-        banner_image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000',
-        description: 'Using computer vision to detect early signs of skin conditions through smartphone cameras.',
-        is_paid: false,
-        message_from_founder: '',
-        founder_signature_photo: '',
-        contact_details: '',
-        roles: [],
-        created_at: new Date().toISOString()
-    }
-]
-
 export default async function InternshipsPage() {
     const rawPosts = await getPosts('internship')
     // Fallback logic: if rawPosts has items but they don't look like InternshipPost (e.g. old schema), 
@@ -60,7 +15,7 @@ export default async function InternshipsPage() {
 
     // cast rawPosts to potential InternshipPost if they have the content spread into them.
     // If getPosts returns { type: 'internship', ...content_fields }, then it works.
-    const posts = rawPosts.length > 0 ? rawPosts as unknown as InternshipPost[] : examplePosts
+    const posts = rawPosts as unknown as InternshipPost[]
 
     return (
         <FeedLayout
