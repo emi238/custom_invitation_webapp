@@ -20,7 +20,7 @@ export default async function InternshipsPage() {
     return (
         <FeedLayout
             title="internships"
-            posts={[]} // Pass empty to suppress list rendering
+            posts={posts}
             type="internship"
         >
             <div className="mb-0">
@@ -28,7 +28,7 @@ export default async function InternshipsPage() {
                 <div className="bg-white/90 p-4 md:p-5 rounded-2xl shadow-sm mb-4">
                     <h3 className="text-lg font-bold text-[#4F3457] mb-2">Note from Em</h3>
 
-                    <div className="space-y-2.5 text-[#4F3457]/90 leading-relaxed text-md">
+                    <div className="space-y-2.5 text-[#4F3457]/90 leading-relaxed text-sm">
                         <p>
                             23% of startups fail because they didn't have "the right team".
                         </p>

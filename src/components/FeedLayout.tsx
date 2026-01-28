@@ -13,7 +13,7 @@ interface Post {
 
 interface FeedLayoutProps {
     title: string
-    posts: Post[]
+    posts: any[]
     type?: 'internship' | 'cofounder' | 'event'
     showAddButton?: boolean
     children?: React.ReactNode
