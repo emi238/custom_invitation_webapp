@@ -268,7 +268,7 @@ export default function CreateInternshipForm({ onSuccess, onCancel }: CreateInte
                     disabled={isSubmitting}
                     className="flex-1 py-4 rounded-xl bg-[#71588A] text-white font-bold hover:bg-[#604878] transition-all disabled:opacity-50 text-lg tracking-wide"
                 >
-                    {isSubmitting ? 'Posting Opportunity...' : 'Submit Opportunity'}
+                    {isSubmitting ? 'Posting Opportunity' : 'Submit Opportunity'}
                 </button>
             </div>
         </form>

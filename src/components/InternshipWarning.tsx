@@ -25,10 +25,10 @@ export default function InternshipWarning() {
             {isOpen && (
                 <div className="mt-4 bg-white border-2 border-[#4F3457]/20 rounded-xl p-6 md:p-8 animate-in fade-in slide-in-from-top-4 duration-300 shadow-lg">
                     <div className="flex items-start justify-between mb-6">
-                        <h2 className="text-2xl font-bold text-[#4F3457]">Attention Startups & Students</h2>
+                        <h2 className="text-lg font-bold text-[#4F3457]">Attention Startups & Students</h2>
                     </div>
 
-                    <p className="text-[#4F3457] mb-6 text-lg">
+                    <p className="text-[#4F3457] mb-6 text-md">
                         <strong>Unpaid Internships</strong> in Australia are <strong>strictly regulated</strong> to <strong>protect internees</strong>.
                         Companies and students <strong>PLEASE READ</strong> before engaging in opportunities:
                         <span className="italic block mt-1 text-sm opacity-80">(Lists are non-cumulative)</span>
@@ -38,8 +38,7 @@ export default function InternshipWarning() {
                         {/* NOT OK Column */}
                         <div className="bg-red-50 p-6 rounded-xl border border-red-100">
                             <div className="flex items-center gap-2 mb-4 text-red-700">
-                                <XCircle className="w-6 h-6 flex-shrink-0" />
-                                <h3 className="font-bold text-lg">Unpaid is NOT OK when:</h3>
+                                <h3 className="font-bold text-md">Unpaid is NOT OK when:</h3>
                             </div>
                             <ul className="space-y-3 text-[#4F3457] list-disc pl-5">
                                 <li>There are <strong>set/rostered hours</strong>, minimum weekly commitments, or full-time blocks.</li>
@@ -54,8 +53,7 @@ export default function InternshipWarning() {
                         {/* OK Column */}
                         <div className="bg-green-50 p-6 rounded-xl border border-green-100">
                             <div className="flex items-center gap-2 mb-4 text-green-700">
-                                <CheckCircle className="w-6 h-6 flex-shrink-0" />
-                                <h3 className="font-bold text-lg">Unpaid is OK when:</h3>
+                                <h3 className="font-bold text-md">Unpaid is OK when:</h3>
                             </div>
                             <ul className="space-y-3 text-[#4F3457] list-disc pl-5">
                                 <li>It’s a <strong>vocational placement</strong> (for-credit, <strong>approved</strong> by a uni/TAFE/course).</li>
@@ -67,12 +65,12 @@ export default function InternshipWarning() {
                     </div>
 
                     <div className="bg-[#4F3457]/5 p-6 rounded-xl mb-8">
-                        <p className="text-[#4F3457] text-lg">
+                        <p className="text-[#4F3457] text-md">
                             <strong>Bottom line:</strong> If it looks like a job (set hours, real deliverables, business benefit, direction/control) → <strong>it must be paid</strong> (minimum wage + super + payslips) <strong>UNLESS</strong> it constitutes credit (hours) for an <strong>approved vocational placement (uni/TAFE)</strong>.
                         </p>
                     </div>
 
-                    <div className="space-y-4 text-[#4F3457]">
+                    <div className="space-y-4 text-[#4F3457] text-md">
                         <p>
                             <strong>Students</strong>, know your <strong>rights to fair work</strong>. If you think you’ve engaged in an internships that violates fair work, you may be eligible to <strong>back-pay</strong>.
                         </p>

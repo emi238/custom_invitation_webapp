@@ -73,7 +73,7 @@ export default async function InternshipsPage() {
                 <div className="bg-white/90 p-4 md:p-5 rounded-2xl shadow-sm mb-4">
                     <h3 className="text-lg font-bold text-[#4F3457] mb-2">Note from Em</h3>
 
-                    <div className="space-y-1.5 text-[#4F3457]/90 leading-relaxed text-md">
+                    <div className="space-y-2.5 text-[#4F3457]/90 leading-relaxed text-md">
                         <p>
                             23% of startups fail because they didn't have "the right team".
                         </p>
@@ -94,12 +94,12 @@ export default async function InternshipsPage() {
                         </p>
                     </div>
 
-                    <div className="mt-2 flex items-center gap-3">
+                    <div className="mt-2 flex items-center gap-4">
                         <div className="w-6">
                             <img
                                 src="/emi-signature.png"
                                 alt="Emi"
-                                className="w-full h-auto"
+                                className="object-contain"
                             />
                         </div>
                         <a href="https://www.linkedin.com/in/emiho" target="_blank" rel="noopener noreferrer" className="text-[#4F3457] hover:text-[#0077b5] transition-colors">

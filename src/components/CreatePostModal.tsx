@@ -81,7 +81,6 @@ export default function CreatePostModal({ isOpen, onClose, type }: CreatePostMod
                                     <div className="w-full max-w-3xl mx-auto pb-12">
                                         {success ? (
                                             <div className="flex flex-col items-center justify-center h-[60vh] text-center">
-                                                <div className="text-6xl mb-6">✨</div>
                                                 <h3 className="text-3xl font-bold text-white mb-2">Submitted!</h3>
                                                 <p className="text-white/50 text-lg">Your post is now live.</p>
                                             </div>
