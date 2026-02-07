@@ -11,7 +11,7 @@ export default function NewHomePage() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/heroimage.svg"
+                    src="/hero_image.png"
                     alt="Hero Background"
                     fill
                     className="object-contain object-top"
@@ -46,12 +46,12 @@ export default function NewHomePage() {
                 {/* Main Title - Bottom (No Padding, Left Aligned) */}
                 <div className="w-full mt-auto mb-12">
                     <h1
-                        className="font-bold leading-[0.4] tracking-tight w-full font-sans uppercase whitespace-nowrap text-left"
+                        className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left text-bottom"
                         style={{
                             color: 'rgba(226, 210, 235, 0.8)', // #E2D2EB 70% opacity
-                            fontSize: '14.2vw',
+                            fontSize: '13.5vw',
                             width: '100%',
-                            marginLeft: '-0.02em', // Subtle negative margin to align visually flush if font has side bearing
+                            marginLeft: '-0.05em', // Subtle negative margin to align visually flush
                         }}
                     >
                         HYPHAE SPACE

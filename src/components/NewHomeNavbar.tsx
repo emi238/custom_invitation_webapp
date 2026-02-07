@@ -25,7 +25,7 @@ export default function NewHomeNavbar() {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="fixed top-8 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 mx-4 md:mx-12 rounded-full backdrop-blur-md"
+                className="fixed top-8 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 mx-4 md:mx-12 rounded-full backdrop-blur-md"
                 style={{
                     backgroundColor: barBgColor,
                     // 'liquid glass' effect - subtle border and shadow could enhance this
