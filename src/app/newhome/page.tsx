@@ -48,7 +48,7 @@ export default function NewHomePage() {
                         className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left"
                         style={{
                             color: 'rgba(226, 210, 235, 0.8)',
-                            fontSize: '18vw',
+                            fontSize: '17vw',
                             width: '100%',
                             marginLeft: '-0.05em',
                             marginBottom: '-10vh',
