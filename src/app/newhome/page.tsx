@@ -5,7 +5,7 @@ import PolaroidGallery from '../../components/PolaroidGallery'
 
 export default function NewHomePage() {
     return (
-        <main className="relative min-h-screen w-full overflow-hidden bg-stone-900">
+        <main className="relative min-h-[100dvh] w-full overflow-hidden bg-stone-900">
             <NewHomeNavbar />
 
             {/* Background Image */}
@@ -14,14 +14,13 @@ export default function NewHomePage() {
                     src="/hero_image.png"
                     alt="Hero Background"
                     fill
-                    className="object-contain object-top"
-                    style={{ marginTop: '-110px' }}
+                    className="object-contain object-top -mt-[5vh] md:-mt-[110px]"
                     priority
                 />
             </div>
 
             {/* Content Overlay */}
-            <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
+            <div className="relative z-10 w-full min-h-[100dvh] flex flex-col justify-between">
 
                 {/* Definition Section - Top Right Area (With Padding) */}
                 <div className="flex justify-end mt-24 md:mt-32 w-full p-6 md:p-12">
@@ -46,12 +45,13 @@ export default function NewHomePage() {
                 {/* Main Title - Bottom (No Padding, Left Aligned) */}
                 <div className="w-full mt-auto mb-12">
                     <h1
-                        className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left text-bottom"
+                        className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left"
                         style={{
-                            color: 'rgba(226, 210, 235, 0.8)', // #E2D2EB 70% opacity
-                            fontSize: '13.5vw',
+                            color: 'rgba(226, 210, 235, 0.8)',
+                            fontSize: '18vw',
                             width: '100%',
-                            marginLeft: '-0.05em', // Subtle negative margin to align visually flush
+                            marginLeft: '-0.05em',
+                            marginBottom: '-10vh',
                         }}
                     >
                         HYPHAE SPACE
