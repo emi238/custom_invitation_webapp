@@ -8,7 +8,9 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
 if (!supabaseUrl || !supabaseKey) {
-    console.error('Missing Supabase environment variables in actions.ts')
+    if (process.env.NODE_ENV === 'production') {
+        console.error('Missing Supabase Service Role Key environment variables in actions.ts')
+    }
 }
 
 // We use a getter or simple client creation to ensure we pick up the env vars at runtime if needed.
@@ -115,9 +117,42 @@ export async function markAsOpened(slug: string) {
     }
 }
 
-// --- Community Board ---
+// --- Community Polaroids ---
 
-// ... existing methods ...
+export async function getCommunityPolaroids() {
+    const supabase = getSupabase()
+
+    try {
+        const { data, error } = await supabase
+            .from('community_polaroids')
+            .select('*')
+
+        if (error) {
+            console.error('Supabase Error (Get Polaroids):', error)
+            return []
+        }
+
+        if (!data) return []
+
+        // Generate public URLs for each item server-side
+        const polaroids = data.map(item => {
+            const { data: { publicUrl } } = supabase.storage
+                .from('polaroids')
+                .getPublicUrl(item.storage_path)
+
+            return {
+                ...item,
+                src: publicUrl
+            }
+        })
+
+        return polaroids
+    } catch (err) {
+        console.error('Unexpected Error (Get Polaroids):', err)
+        return []
+    }
+}
+
 
 // --- Community Board ---
 
