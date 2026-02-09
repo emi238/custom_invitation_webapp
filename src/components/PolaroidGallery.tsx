@@ -18,15 +18,15 @@ interface PolaroidProps {
 function Polaroid({ src, caption, rotation, x, y, delay }: PolaroidProps) {
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.2, x: '80%', y: '80%' }} // Start near top of camera at bottom right
-            animate={{ opacity: 1, scale: 1, x: `${x}%`, y: `${y}%` }} // Fly out to random position
+            initial={{ opacity: 0, scale: 0.1, left: '80%', top: '80%' }} // Start near camera at bottom right
+            animate={{ opacity: 1, scale: 1, left: `${x}%`, top: `${y}%` }} // Fly out to random position
             transition={{
                 type: "spring",
                 stiffness: 60,
                 damping: 12,
                 delay: delay * 0.15 // Stagger effect
             }}
-            className="absolute w-40 md:w-56 overflow-visible transform hover:scale-110 hover:z-50 transition-all duration-300 ease-out cursor-pointer origin-center"
+            className="absolute w-32 md:w-44 overflow-visible transform hover:scale-110 hover:z-50 transition-all duration-300 ease-out cursor-pointer origin-center"
             style={{
                 rotate: `${rotation}deg`,
                 zIndex: 10,
@@ -57,30 +57,43 @@ export default function PolaroidGallery() {
 
                 if (data && data.length > 0) {
                     // Predefined scatter positions (x, y) in percentages to mimic the reference layout
-                    // Avoiding bottom right corner where the camera is.
-                    const slots = [
-                        { x: 5, y: 10, r: -5 },   // Top Left
-                        { x: 25, y: 5, r: 3 },    // Top mid-left
-                        { x: 45, y: 15, r: -2 },  // Top center
-                        { x: 65, y: 8, r: 4 },    // Top right
-                        { x: 10, y: 40, r: 6 },   // Mid left
-                        { x: 35, y: 35, r: -4 },  // Mid center
-                        { x: 60, y: 45, r: 2 },   // Mid right
-                        { x: 15, y: 70, r: -3 },  // Bottom left
-                        { x: 40, y: 65, r: 5 },   // Bottom center
-                        { x: 75, y: 30, r: -6 },  // Upper mid right (above camera)
+                    // "Wijdan, Ronil, Flynn, Blake, Tinzen, Isaac, Demus, Dakoda, Sam"
+                    const knownSlots = [
+                        { names: ['Wijdan'], x: 5, y: 12, r: 5 },       // Top Left
+                        { names: ['Ronil'], x: 22, y: 22, r: 3 },        // Mid Left
+                        { names: ['Isaac'], x: 8, y: 60, r: 8 },        // Bottom Left
+                        { names: ['Flynn'], x: 38, y: 11, r: -4 },        // Top Center-Left
+                        { names: ['Dennis'], x: 27, y: 60, r: 6 }, // Bottom Center-Left
+                        { names: ['Blake'], x: 42, y: 50, r: -4 },       // Center
+                        { names: ['Dakoda'], x: 55, y: 25, r: -5 },      // Bottom Center
+                        { names: ['Tinzen'], x: 70, y: 12, r: 8 },      // Top Right
+                        { names: ['First', 'Shot'], x: 85, y: 23, r: 6 }, // Far Right
+                        { names: ['Sam'], x: 60, y: 65, r: -5 },          // Bottom Right
                     ]
 
                     const mapped = data.map((item: any, i: number) => {
-                        // Use a slot if available, otherwise random
-                        const slot = slots[i % slots.length]
+                        // Find matching slot by caption
+                        let slot = knownSlots.find(s =>
+                            s.names.some(name => item.caption?.toLowerCase().includes(name.toLowerCase()))
+                        )
+
+                        // Fallback if no specific slot found
+                        if (!slot) {
+                            slot = {
+                                names: [],
+                                x: Math.random() * 80 + 10,
+                                y: Math.random() * 80 + 10,
+                                r: (Math.random() * 10) - 5
+                            }
+                        }
+
                         return {
                             id: item.id,
                             src: item.src,
                             caption: item.caption,
-                            rotation: slot.r + (Math.random() * 4 - 2), // Slight rotation jitter
-                            x: slot.x + (Math.random() * 2 - 1),        // Slight x jitter
-                            y: slot.y + (Math.random() * 2 - 1),        // Slight y jitter
+                            rotation: slot.r,
+                            x: slot.x,
+                            y: slot.y,
                             delay: i
                         }
                     })
@@ -98,28 +111,21 @@ export default function PolaroidGallery() {
         <section
             ref={containerRef}
             id="polaroid-gallery"
-            className="relative min-h-[120vh] w-full overflow-hidden"
+            className="relative h-[100vh] w-full overflow-hidden"
             style={{
                 // "The background is linear gradient from 100%, #FFE9C0 to 100%, #AD99C1 from half of the screen."
                 background: 'linear-gradient(to bottom, #FFE9C0 0%, #FFE9C0 50%, #AD99C1 100%)'
             }}
         >
-            <div className="relative w-full h-full min-h-[120vh]">
-                {/* Section Title */}
-                <div className="absolute top-10 left-0 right-0 text-center z-20 pointer-events-none">
-                    <h2 className="text-4xl md:text-6xl font-bold text-[#5E4175]/80 font-sans tracking-tight opacity-70">
-                        our community
-                    </h2>
-                </div>
-
+            <div className="relative w-full h-full">
                 {/* Fixed Camera Image at Bottom Right */}
-                <div className="absolute bottom-10 right-[-20px] md:right-10 z-30 w-64 md:w-[500px] pointer-events-none">
+                <div className="absolute bottom-5 right-[-20px] md:right-5 z-0 w-[220px] md:w-[380px] pointer-events-none">
                     <Image
                         src="/fujifilm.png"
                         alt="Fujifilm Camera"
-                        width={600}
-                        height={600}
-                        className="object-contain transform -rotate-6"
+                        width={400}
+                        height={400}
+                        className="object-contain transform rotate-6"
                         priority
                     />
                 </div>
