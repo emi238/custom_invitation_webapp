@@ -5,7 +5,7 @@ import PolaroidGallery from '../../components/PolaroidGallery'
 
 export default function NewHomePage() {
     return (
-        <main className="w-full bg-stone-900 overflow-x-hidden">
+        <main className="w-full bg-stone-900">
             <NewHomeNavbar />
 
             {/* Hero Section */}
