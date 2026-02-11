@@ -1,23 +1,31 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { MotionValue, motion, useInView, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { getCommunityPolaroids } from '@/app/actions'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-interface PolaroidProps {
+interface PolaroidData {
     id: string
     src: string
     caption?: string
     rotation: number
     x: number
     y: number
-    mx: number // Mobile X
-    my: number // Mobile Y
+    mx: number
+    my: number
+    ex: number
+    ey: number
+    emx: number
+    emy: number
     delay: number
+}
+
+interface PolaroidProps extends PolaroidData {
+    scrollYProgress: MotionValue<number>
 }
 
 function useMediaQuery(query: string) {
@@ -36,28 +44,35 @@ function useMediaQuery(query: string) {
     return matches
 }
 
-function Polaroid({ src, caption, rotation, x, y, mx, my, delay }: PolaroidProps) {
+function Polaroid({ src, caption, rotation, x, y, mx, my, ex, ey, emx, emy, delay, scrollYProgress }: PolaroidProps) {
     const isMobile = useMediaQuery('(max-width: 1024px)') // Mobile and Tablet mode
+
+    // Use transform to animate from Start Position (x) to Edge Position (ex) based on scroll
+    // 0.15 - 0.5 matches the overlay animation range
+    const currentX = useTransform(scrollYProgress, [0.15, 0.5], [`${isMobile ? mx : x}%`, `${isMobile ? emx : ex}%`])
+    const currentY = useTransform(scrollYProgress, [0.15, 0.5], [`${isMobile ? my : y}%`, `${isMobile ? emy : ey}%`])
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.1, left: '80%', top: '80%' }} // Start near camera at bottom right
+            initial={{ opacity: 0, scale: 0.1, x: 100, y: 100 }} // Start near camera (offset translation)
             animate={{
                 opacity: 1,
                 scale: 1,
-                left: `${isMobile ? mx : x}%`,
-                top: `${isMobile ? my : y}%`
-            }} // Fly out to random position
+                x: 0,
+                y: 0
+            }} // Fly to natural position
             transition={{
                 type: "spring",
                 stiffness: 60,
                 damping: 12,
                 delay: delay * 0.15 // Stagger effect
             }}
-            className="absolute w-24 md:w-44 overflow-visible transform hover:scale-110 hover:z-50 transition-all duration-300 ease-out cursor-pointer origin-center"
+            className="absolute w-24 md:w-32 lg:w-44 overflow-visible transform hover:scale-110 hover:z-50 transition-all duration-300 ease-out cursor-pointer origin-center"
             style={{
                 rotate: `${rotation}deg`,
                 zIndex: 10,
+                left: currentX,
+                top: currentY
             }}
         >
             <div className="relative w-full h-full pointer-events-none">
@@ -73,7 +88,7 @@ function Polaroid({ src, caption, rotation, x, y, mx, my, delay }: PolaroidProps
 }
 
 export default function PolaroidGallery() {
-    const [polaroids, setPolaroids] = useState<PolaroidProps[]>([])
+    const [polaroids, setPolaroids] = useState<PolaroidData[]>([])
     const containerRef = useRef(null)
     const isInView = useInView(containerRef, { amount: 0.25, once: true })
     const { scrollYProgress } = useScroll({
@@ -94,20 +109,20 @@ export default function PolaroidGallery() {
                 const data = await getCommunityPolaroids()
 
                 if (data && data.length > 0) {
-                    // Predefined scatter positions (x, y) in percentages to mimic the reference layout
-                    // "Wijdan, Ronil, Flynn, Blake, Tinzen, Isaac, Demus, Dakoda, Sam"
                     // Predefined scatter positions (x, y) = Desktop, (mx, my) = Mobile/Tablet
+                    // ex, ey = Edge positions for Desktop (when overlay is up) -> Forming a circle/frame
+                    // emx, emy = Edge positions for Mobile -> Forming a frame around text
                     const knownSlots = [
-                        { names: ['Wijdan'], x: 5, y: 12, mx: 3, my: 12, r: 5 },       // Top Left
-                        { names: ['Ronil'], x: 22, y: 15, mx: 7, my: 35, r: 3 },        // Mid Left
-                        { names: ['Isaac'], x: 8, y: 60, mx: 7, my: 58, r: 8 },        // Bottom Left
-                        { names: ['Flynn'], x: 38, y: 11, mx: 35, my: 15, r: -4 },        // Top Center-Left
-                        { names: ['Dennis'], x: 27, y: 60, mx: 43, my: 59, r: 6 }, // Bottom Center-Left
-                        { names: ['Blake'], x: 42, y: 50, mx: 37, my: 37, r: -4 },       // Center
-                        { names: ['Dakoda'], x: 55, y: 18, mx: 65, my: 34, r: -5 },      // Bottom Center
-                        { names: ['Tinzen'], x: 70, y: 12, mx: 70, my: 12, r: 8 },      // Top Right
-                        { names: ['First', 'Shot'], x: 85, y: 20, mx: 78, my: 55, r: 6 }, // Far Right
-                        { names: ['Sam'], x: 60, y: 60, mx: 20, my: 79, r: -5 },          // Bottom Right
+                        { names: ['Wijdan'], x: 5, y: 12, mx: 3, my: 12, r: 5, ex: 13, ey: 10, emx: 5, emy: 10 },       // Top Left (Higher, Right)
+                        { names: ['Ronil'], x: 22, y: 15, mx: 7, my: 35, r: 3, ex: 5, ey: 45, emx: 2, emy: 35 },        // Mid Left
+                        { names: ['Isaac'], x: 8, y: 60, mx: 7, my: 58, r: 8, ex: 18, ey: 78, emx: 5, emy: 80 },        // Bottom Left (Right, Higher)
+                        { names: ['Flynn'], x: 38, y: 11, mx: 35, my: 15, r: -4, ex: 35, ey: 5, emx: 35, emy: 5 },        // Top Center-Left
+                        { names: ['Dennis'], x: 27, y: 60, mx: 43, my: 59, r: 6, ex: 35, ey: 75, emx: 30, emy: 85 }, // Bottom Center-Left (Higher)
+                        { names: ['Blake'], x: 42, y: 50, mx: 37, my: 37, r: -4, ex: 58, ey: 75, emx: 70, emy: 85 },       // Center -> Bottom Right Center (Higher, Left)
+                        { names: ['Dakoda'], x: 55, y: 18, mx: 65, my: 34, r: -5, ex: 55, ey: 5, emx: 65, emy: 5 },      // Top Center -> Top Right Center (Left)
+                        { names: ['Tinzen'], x: 70, y: 12, mx: 70, my: 12, r: 8, ex: 75, ey: 8, emx: 90, emy: 10 },      // Top Right (Left, Higher)
+                        { names: ['First', 'Shot'], x: 85, y: 20, mx: 78, my: 55, r: 6, ex: 90, ey: 25, emx: 95, emy: 40 }, // Right Edge (Higher)
+                        { names: ['Sam'], x: 60, y: 60, mx: 20, my: 79, r: -5, ex: 90, ey: 70, emx: 85, emy: 80 },          // Bottom Right (Higher)
                     ]
 
                     const mapped = data.map((item: any, i: number) => {
@@ -116,27 +131,42 @@ export default function PolaroidGallery() {
                             s.names.some(name => item.caption?.toLowerCase().includes(name.toLowerCase()))
                         )
 
-                        // Fallback if no specific slot found
-                        if (!slot) {
-                            slot = {
-                                names: [],
-                                x: Math.random() * 80 + 10,
-                                y: Math.random() * 80 + 10,
-                                mx: Math.random() * 80 + 10,
-                                my: Math.random() * 80 + 10,
-                                r: (Math.random() * 10) - 5
+                        // If found, use specific slot values
+                        if (slot) {
+                            return {
+                                id: item.id,
+                                src: item.src,
+                                caption: item.caption,
+                                rotation: slot.r,
+                                x: slot.x,
+                                y: slot.y,
+                                mx: slot.mx,
+                                my: slot.my,
+                                ex: slot.ex,
+                                ey: slot.ey,
+                                emx: slot.emx,
+                                emy: slot.emy,
+                                delay: i
                             }
                         }
 
+                        // Fallback: Random scatter and random edge push
+                        const isLeft = Math.random() > 0.5
+                        const isTop = Math.random() > 0.5
                         return {
                             id: item.id,
                             src: item.src,
                             caption: item.caption,
-                            rotation: slot.r,
-                            x: slot.x,
-                            y: slot.y,
-                            mx: slot.mx,
-                            my: slot.my,
+                            rotation: (Math.random() * 10) - 5,
+                            x: Math.random() * 80 + 10,
+                            y: Math.random() * 80 + 10,
+                            mx: Math.random() * 80 + 10,
+                            my: Math.random() * 80 + 10,
+                            // Push random items to corners/edges
+                            ex: isLeft ? Math.random() * 15 : 85 + Math.random() * 15,
+                            ey: isTop ? Math.random() * 15 : 85 + Math.random() * 15,
+                            emx: isLeft ? Math.random() * 15 : 85 + Math.random() * 15,
+                            emy: isTop ? Math.random() * 15 : 85 + Math.random() * 15,
                             delay: i
                         }
                     })
@@ -180,6 +210,7 @@ export default function PolaroidGallery() {
                     <Polaroid
                         key={p.id}
                         {...p}
+                        scrollYProgress={scrollYProgress}
                     />
                 ))}
 
@@ -190,11 +221,11 @@ export default function PolaroidGallery() {
                 >
                     <div className="absolute inset-0 bg-white/20 backdrop-blur-xs rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-white/30"></div>
 
-                    <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-8">
-                        <h2 className={`${inter.className} font-bold text-[#5E4175] text-4xl md:text-[100px] leading-none tracking-tight`}>
+                    <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-2">
+                        <h2 className={`${inter.className} font-bold text-[#5E4175] text-3xl md:text-[100px] leading-none tracking-tight`}>
                             who we are
                         </h2>
-                        <p className={`${inter.className} font-medium text-[#4F3457] text-lg md:text-[30px] leading-relaxed max-w-3xl mx-auto`}>
+                        <p className={`${inter.className} font-medium text-[#4F3457] text-sm md:text-[30px] leading-relaxed max-w-3xl mx-auto`}>
                             Hyphae is a founder-first social community for young
                             founders across Queensland. We connect ambitious
                             entrepreneurs not by university or experience but by hunger
