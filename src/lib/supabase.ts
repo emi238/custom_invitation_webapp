@@ -18,8 +18,8 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 // Export the client directly.
-const url = supabaseUrl || ''
-const key = supabaseKey || ''
+const url = supabaseUrl || 'https://placeholder.supabase.co'
+const key = supabaseKey || 'placeholder-key'
 
 export const supabase = createClient(url, key, {
   auth: {

@@ -2,6 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import NewHomeNavbar from '../../components/NewHomeNavbar'
 import PolaroidGallery from '../../components/PolaroidGallery'
+import MissionVisionSection from '../../components/MissionVisionSection'
+import EventsSection from '../../components/EventsSection'
 
 export default function NewHomePage() {
     return (
@@ -62,6 +64,12 @@ export default function NewHomePage() {
 
             {/* Polaroid Gallery Section */}
             <PolaroidGallery />
+
+            {/* Mission & Vision Section */}
+            <MissionVisionSection />
+
+            {/* Events Section */}
+            <EventsSection />
         </main>
     )
 }

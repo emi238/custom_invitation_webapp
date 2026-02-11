@@ -115,14 +115,14 @@ export default function PolaroidGallery() {
                     const knownSlots = [
                         { names: ['Wijdan'], x: 5, y: 12, mx: 3, my: 12, r: 5, ex: 13, ey: 10, emx: 5, emy: 10 },       // Top Left (Higher, Right)
                         { names: ['Ronil'], x: 22, y: 15, mx: 7, my: 35, r: 3, ex: 5, ey: 45, emx: 2, emy: 35 },        // Mid Left
-                        { names: ['Isaac'], x: 8, y: 60, mx: 7, my: 58, r: 8, ex: 18, ey: 78, emx: 5, emy: 80 },        // Bottom Left (Right, Higher)
-                        { names: ['Flynn'], x: 38, y: 11, mx: 35, my: 15, r: -4, ex: 35, ey: 5, emx: 35, emy: 5 },        // Top Center-Left
-                        { names: ['Dennis'], x: 27, y: 60, mx: 43, my: 59, r: 6, ex: 35, ey: 75, emx: 30, emy: 85 }, // Bottom Center-Left (Higher)
-                        { names: ['Blake'], x: 42, y: 50, mx: 37, my: 37, r: -4, ex: 58, ey: 75, emx: 70, emy: 85 },       // Center -> Bottom Right Center (Higher, Left)
-                        { names: ['Dakoda'], x: 55, y: 18, mx: 65, my: 34, r: -5, ex: 55, ey: 5, emx: 65, emy: 5 },      // Top Center -> Top Right Center (Left)
-                        { names: ['Tinzen'], x: 70, y: 12, mx: 70, my: 12, r: 8, ex: 75, ey: 8, emx: 90, emy: 10 },      // Top Right (Left, Higher)
-                        { names: ['First', 'Shot'], x: 85, y: 20, mx: 78, my: 55, r: 6, ex: 90, ey: 25, emx: 95, emy: 40 }, // Right Edge (Higher)
-                        { names: ['Sam'], x: 60, y: 60, mx: 20, my: 79, r: -5, ex: 90, ey: 70, emx: 85, emy: 80 },          // Bottom Right (Higher)
+                        { names: ['Isaac'], x: 8, y: 60, mx: 7, my: 58, r: 8, ex: 18, ey: 78, emx: 5, emy: 65 },        // Bottom Left (Right, Higher)
+                        { names: ['Flynn'], x: 38, y: 11, mx: 35, my: 15, r: -4, ex: 35, ey: 5, emx: 30, emy: 20 },        // Top Center-Left
+                        { names: ['Dennis'], x: 27, y: 60, mx: 43, my: 59, r: 6, ex: 35, ey: 75, emx: 30, emy: 75 }, // Bottom Center-Left (Higher)
+                        { names: ['Blake'], x: 42, y: 50, mx: 37, my: 37, r: -4, ex: 58, ey: 75, emx: 58, emy: 70 },       // Center -> Bottom Right Center (Higher, Left)
+                        { names: ['Dakoda'], x: 55, y: 18, mx: 65, my: 34, r: -5, ex: 55, ey: 5, emx: 55, emy: 5 },      // Top Center -> Top Right Center (Left)
+                        { names: ['Tinzen'], x: 70, y: 12, mx: 70, my: 12, r: 8, ex: 75, ey: 8, emx: 80, emy: 10 },      // Top Right (Left, Higher)
+                        { names: ['First', 'Shot'], x: 85, y: 20, mx: 78, my: 55, r: 6, ex: 90, ey: 25, emx: 80, emy: 50 }, // Right Edge (Higher)
+                        { names: ['Sam'], x: 60, y: 60, mx: 20, my: 79, r: -5, ex: 90, ey: 70, emx: 58, emy: 27 },          // Bottom Right (Higher)
                     ]
 
                     const mapped = data.map((item: any, i: number) => {
@@ -222,10 +222,10 @@ export default function PolaroidGallery() {
                     <div className="absolute inset-0 bg-white/20 backdrop-blur-xs rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-white/30"></div>
 
                     <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-2">
-                        <h2 className={`${inter.className} font-bold text-[#5E4175] text-3xl md:text-[100px] leading-none tracking-tight`}>
+                        <h2 className={`${inter.className} font-bold text-[#5E4175] text-xl md:text-[100px] leading-none tracking-tight`}>
                             who we are
                         </h2>
-                        <p className={`${inter.className} font-medium text-[#4F3457] text-sm md:text-[30px] leading-relaxed max-w-3xl mx-auto`}>
+                        <p className={`${inter.className} font-medium text-[#4F3457] text-md md:text-[25px] leading-relaxed max-w-[60%] mx-auto`}>
                             Hyphae is a founder-first social community for young
                             founders across Queensland. We connect ambitious
                             entrepreneurs not by university or experience but by hunger
