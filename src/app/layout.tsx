@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="snap-y snap-mandatory scroll-smooth">
       <body
         className={`${dmSans.variable} ${playfairDisplay.variable} antialiased`}
         style={{ fontFamily: 'var(--font-dm-sans), sans-serif' }}

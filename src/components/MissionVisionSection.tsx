@@ -9,7 +9,7 @@ const dmSans = DM_Sans({ subsets: ['latin'], weight: ['700'] })
 export default function MissionVisionSection() {
     return (
         <section
-            className="relative w-full h-[100vh] overflow-hidden flex flex-col justify-between"
+            className="relative w-full h-[100vh] overflow-hidden flex flex-col justify-between snap-start"
             style={{
                 background: 'linear-gradient(to bottom, #B19BBA 0%, #8875B7 70%)'
             }}
@@ -17,19 +17,19 @@ export default function MissionVisionSection() {
             {/* Stats Row */}
             <div className={`max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center mt-24 md:mt-32 relative z-20`}>
                 <div className="flex flex-col items-center">
-                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-3xl lg:text-4xl font-bold`}>1</span>
-                    <span className="text-white text-base md:text-lg mt-2 font-medium tracking-wide">Community</span>
+                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-4xl lg:text-5xl font-bold`}>1</span>
+                    <span className="text-white text-base md:text-xl mt-2 font-medium tracking-wide">Community</span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-3xl lg:text-4xl font-bold`}>20+</span>
+                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-4xl lg:text-5xl font-bold`}>20+</span>
                     <span className="text-white text-base md:text-lg mt-2 font-medium tracking-wide">Young Founders</span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-3xl lg:text-4xl font-bold`}>∞</span>
+                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-4xl lg:text-5xl font-bold`}>∞</span>
                     <span className="text-white text-base md:text-lg mt-2 font-medium tracking-wide">Ideas Shared</span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-3xl lg:text-4xl font-bold`}>Brisbane</span>
+                    <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-4xl lg:text-5xl font-bold`}>Brisbane</span>
                     <span className="text-white text-base md:text-lg mt-2 font-medium tracking-wide">Based</span>
                 </div>
             </div>

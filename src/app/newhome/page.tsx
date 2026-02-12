@@ -7,11 +7,11 @@ import EventsSection from '../../components/EventsSection'
 
 export default function NewHomePage() {
     return (
-        <main className="w-full bg-stone-900">
+        <main className="bg-[#E6DDD8] min-h-screen">
             <NewHomeNavbar />
 
             {/* Hero Section */}
-            <section className="relative h-[100vh] w-full overflow-hidden">
+            <section className="relative h-[100vh] w-full overflow-hidden snap-start">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0 flex justify-center items-start md:block">
                     <img

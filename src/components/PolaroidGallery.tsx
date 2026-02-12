@@ -184,8 +184,11 @@ export default function PolaroidGallery() {
         <section
             ref={containerRef}
             id="polaroid-gallery"
-            className="relative h-[300vh] w-full"
+            className="relative h-[300vh] w-full snap-start"
         >
+            {/* Internal Snap Point for Overlay Visibility */}
+            <div className="absolute top-[50%] w-full h-1 snap-start pointer-events-none" />
+
             <div
                 className="sticky top-0 h-[100vh] w-full overflow-hidden"
                 style={{
@@ -222,10 +225,10 @@ export default function PolaroidGallery() {
                     <div className="absolute inset-0 bg-white/20 backdrop-blur-xs rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-white/30"></div>
 
                     <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-2">
-                        <h2 className={`${inter.className} font-bold text-[#5E4175] text-xl md:text-[100px] leading-none tracking-tight`}>
+                        <h2 className={`${inter.className} font-bold text-[#5E4175] text-2xl md:text-7xl leading-none tracking-tight`}>
                             who we are
                         </h2>
-                        <p className={`${inter.className} font-medium text-[#4F3457] text-md md:text-[25px] leading-relaxed max-w-[60%] mx-auto`}>
+                        <p className={`${inter.className} font-medium text-[#4F3457] text-sm md:text-xl leading-relaxed max-w-[60%] mx-auto`}>
                             Hyphae is a founder-first social community for young
                             founders across Queensland. We connect ambitious
                             entrepreneurs not by university or experience but by hunger
