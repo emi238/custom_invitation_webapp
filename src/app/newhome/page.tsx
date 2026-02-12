@@ -4,6 +4,7 @@ import NewHomeNavbar from '../../components/NewHomeNavbar'
 import PolaroidGallery from '../../components/PolaroidGallery'
 import MissionVisionSection from '../../components/MissionVisionSection'
 import EventsSection from '../../components/EventsSection'
+import CommunitySection from '../../components/CommunitySection'
 
 export default function NewHomePage() {
     return (
@@ -70,6 +71,9 @@ export default function NewHomePage() {
 
             {/* Events Section */}
             <EventsSection />
+
+            {/* Community Section */}
+            <CommunitySection />
         </main>
     )
 }
