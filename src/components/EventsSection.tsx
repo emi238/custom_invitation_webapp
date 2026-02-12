@@ -70,22 +70,22 @@ export default function EventsSection() {
     const weekDays = ['mon', 'tues', 'weds', 'thurs', 'fri', 'sat', 'sun']
 
     return (
-        <section className="w-full h-screen bg-[#E6DDD8] pt-24 pb-16 relative px-4 md:px-8 flex flex-col justify-center overflow-hidden snap-start">
-            {/* Increased max-width to make grids larger as requested */}
-            <div className="max-w-5xl mx-auto w-full flex flex-col">
-                <h2 className={`${inter.className} font-bold text-[#4F3457] text-4xl md:text-6xl mb-6 mt-[30px] lowercase tracking-tight shrink-0`}>
+        <section className="w-full bg-[#E6DDD8] pt-24 pb-16 relative px-4 md:px-8 flex flex-col justify-center overflow-hidden snap-start">
+            {/* Reduced max-width to make grids smaller as requested (4xl) */}
+            <div className="max-w-6xl mx-auto w-full flex flex-col">
+                <h2 className={`${inter.className} font-bold text-[#4F3457] text-3xl md:text-5xl mb-6 mt-[30px] lowercase tracking-tight shrink-0 pl-6 md:pl-8`}>
                     our events
                 </h2>
 
                 {/* Glass Container */}
                 <div
-                    className="relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden p-4 md:p-6 flex flex-col"
+                    className="relative rounded-[1.5rem] md:rounded-[1.5rem] overflow-hidden p-6 md:p-8 flex flex-col"
                     style={{
                         background: 'linear-gradient(to bottom, rgba(247, 244, 243, 0.6) 0%, rgba(143, 124, 183, 0.6) 100%)'
                     }}
                 >
                     {/* Botanical Background Asset - Fixed Right */}
-                    <div className="absolute top-0 right-0 h-full w-[60%] z-0 pointer-events-none opacity-60 mix-blend-multiply">
+                    <div className="absolute top-0 right-0 h-full w-[60%] z-0 pointer-events-none opacity-50 mix-blend-multiply">
                         <div className="relative w-full h-full">
                             <Image
                                 src="/background-botanical.png"
@@ -98,20 +98,20 @@ export default function EventsSection() {
 
                     {/* Calendar Content */}
                     <div className="relative z-10 w-full flex flex-col">
-                        {/* Month Navigation - Increased Font Sizes */}
+                        {/* Month Navigation - Reduced Font Sizes */}
                         <div className="flex justify-center items-center gap-6 mb-4 shrink-0">
                             <button
                                 onClick={prevMonth}
-                                className={`${inter.className} text-[#4F3457] text-3xl md:text-5xl font-bold hover:opacity-70 transition-opacity`}
+                                className={`${inter.className} text-[#4F3457] text-2xl md:text-4xl font-bold hover:opacity-70 transition-opacity`}
                             >
                                 &lt;
                             </button>
-                            <h3 className={`${inter.className} text-[#4F3457] text-3xl md:text-5xl font-bold tracking-tight`}>
+                            <h3 className={`${inter.className} text-[#4F3457] text-2xl md:text-4xl font-bold tracking-tight`}>
                                 {monthName}
                             </h3>
                             <button
                                 onClick={nextMonth}
-                                className={`${inter.className} text-[#4F3457] text-3xl md:text-5xl font-bold hover:opacity-70 transition-opacity`}
+                                className={`${inter.className} text-[#4F3457] text-2xl md:text-4xl font-bold hover:opacity-70 transition-opacity`}
                             >
                                 &gt;
                             </button>
@@ -119,16 +119,16 @@ export default function EventsSection() {
 
                         {/* Calendar Grid Container */}
                         <div className="w-full flex flex-col">
-                            {/* Weekday Headers - Increased Font Sizes */}
+                            {/* Weekday Headers - Reduced Font Sizes */}
                             <div className="grid grid-cols-7 gap-1 mb-1 shrink-0">
                                 {weekDays.map((day) => (
-                                    <div key={day} className={`${inter.className} text-[#4F3457] text-sm md:text-xl font-bold uppercase text-center`}>
+                                    <div key={day} className={`${inter.className} text-[#4F3457] text-xs md:text-base font-bold uppercase text-center`}>
                                         {day}
                                     </div>
                                 ))}
                             </div>
 
-                            {/* Days Grid - Increased number sizes */}
+                            {/* Days Grid - Reduced number sizes */}
                             <div className="grid grid-cols-7 gap-0 border-t border-l border-[#4F3457]/20 rounded-lg overflow-hidden">
                                 {days.map((date, index) => {
                                     if (!date) {
@@ -144,7 +144,7 @@ export default function EventsSection() {
                                             key={dateString}
                                             className="bg-transparent relative flex flex-col p-1 transition-colors hover:bg-white/10 aspect-square border-b border-r border-[#4F3457]/20"
                                         >
-                                            <span className={`${inter.className} text-[#4F3457] font-bold text-base md:text-2xl`}>
+                                            <span className={`${inter.className} text-[#4F3457] font-bold text-xs md:text-xl`}>
                                                 {dayNumber}
                                             </span>
 
@@ -164,18 +164,18 @@ export default function EventsSection() {
                                                         />
                                                     </div>
 
-                                                    {/* Hover Overlay - Increased Text */}
+                                                    {/* Hover Overlay - Reduced Text */}
                                                     <div
-                                                        className={`absolute inset-0 bg-[#E6DDD8]/95 backdrop-blur-sm p-2 flex flex-col justify-center gap-0.5 transition-opacity duration-300 rounded-sm overflow-hidden ${hoveredEventId === event.id ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                                                        className={`absolute inset-0 bg-[#E6DDD8]/95 backdrop-blur-sm p-1 flex flex-col justify-center gap-0.5 transition-opacity duration-300 rounded-sm overflow-hidden ${hoveredEventId === event.id ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                                                     >
-                                                        <h4 className={`${inter.className} text-[#4F3457] font-bold text-xs md:text-sm leading-tight line-clamp-2`}>
+                                                        <h4 className={`${inter.className} text-[#4F3457] font-bold text-[8px] md:text-[10px] leading-tight line-clamp-2`}>
                                                             {event.event_title}
                                                         </h4>
-                                                        <p className={`${inter.className} text-[#4F3457] text-[10px] md:text-xs`}>
+                                                        <p className={`${inter.className} text-[#4F3457] text-[6px] md:text-[8px]`}>
                                                             {event.time}
                                                         </p>
                                                         {event.link && (
-                                                            <span className={`${inter.className} text-[#8F7CB7] text-[10px] md:text-xs font-bold underline`}>
+                                                            <span className={`${inter.className} text-[#8F7CB7] text-[6px] md:text-[8px] font-bold underline`}>
                                                                 RSVP
                                                             </span>
                                                         )}
