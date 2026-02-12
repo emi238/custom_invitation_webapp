@@ -119,6 +119,44 @@ export async function markAsOpened(slug: string) {
 
 // --- Community Polaroids ---
 
+// --- Community Photos (General Community Section) ---
+
+export async function getCommunityPhotos() {
+    const supabase = getSupabase()
+
+    try {
+        const { data, error } = await supabase
+            .from('community_photos')
+            .select('*')
+
+        if (error) {
+            console.error('Supabase Error (Get Community Photos):', error)
+            return []
+        }
+
+        if (!data) return []
+
+        // Generate public URLs for each item server-side
+        const photos = data.map(item => {
+            const { data: { publicUrl } } = supabase.storage
+                .from('photos')
+                .getPublicUrl(item.storage_path)
+
+            return {
+                ...item,
+                src: publicUrl
+            }
+        })
+
+        return photos
+    } catch (err) {
+        console.error('Unexpected Error (Get Community Photos):', err)
+        return []
+    }
+}
+
+// --- Community Polaroids (Who We Are - Founders) ---
+
 export async function getCommunityPolaroids() {
     const supabase = getSupabase()
 
@@ -310,5 +348,60 @@ export async function uploadFile(formData: FormData) {
     } catch (error: any) {
         console.error('Upload Error:', error)
         return { success: false, message: error.message || 'Upload failed' }
+    }
+}
+
+// --- Community Events ---
+
+export async function uploadEventImage(formData: FormData) {
+    const supabase = getSupabase()
+    const file = formData.get('file') as File
+
+    if (!file) {
+        return { success: false, message: 'No file provided' }
+    }
+
+    try {
+        const fileExt = file.name.split('.').pop()
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+        const filePath = `${fileName}`
+
+        // Upload to 'event_thumbnails' bucket
+        const { error: uploadError } = await supabase.storage
+            .from('event_thumbnails')
+            .upload(filePath, file)
+
+        if (uploadError) {
+            console.error('Supabase Storage Error (Event):', uploadError)
+            return { success: false, message: uploadError.message }
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+            .from('event_thumbnails')
+            .getPublicUrl(filePath)
+
+        return { success: true, url: publicUrl }
+    } catch (error: any) {
+        console.error('Upload Event Image Error:', error)
+        return { success: false, message: error.message || 'Upload failed' }
+    }
+}
+
+export async function createEvent(eventData: any) {
+    const supabase = getSupabase()
+
+    try {
+        const { error } = await supabase
+            .from('upcoming_events')
+            .insert([eventData])
+
+        if (error) {
+            console.error('Supabase Error (Create Event):', error)
+            return { success: false, message: error.message }
+        }
+        return { success: true }
+    } catch (err: any) {
+        console.error('Unexpected Error (Create Event):', err)
+        return { success: false, message: err.message || 'An unexpected error occurred.' }
     }
 }

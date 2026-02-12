@@ -11,7 +11,7 @@ export default function MissionVisionSection() {
         <section
             className="relative w-full h-[100vh] overflow-hidden flex flex-col justify-between snap-start"
             style={{
-                background: 'linear-gradient(to bottom, #B19BBA 0%, #8875B7 70%)'
+                background: 'linear-gradient(to bottom, #B19BBA 0%, #8875B7 100%)'
             }}
         >
             {/* Stats Row */}

@@ -79,7 +79,7 @@ export default function EventsSection() {
 
                 {/* Glass Container */}
                 <div
-                    className="relative rounded-[1.5rem] md:rounded-[1.5rem] overflow-hidden p-6 md:p-8 flex flex-col"
+                    className="relative rounded-[0.5rem] md:rounded-[1rem] overflow-hidden p-10 md:p-8 flex flex-col"
                     style={{
                         background: 'linear-gradient(to bottom, rgba(247, 244, 243, 0.6) 0%, rgba(143, 124, 183, 0.6) 100%)'
                     }}
@@ -135,7 +135,13 @@ export default function EventsSection() {
                                         return <div key={`empty-${index}`} className="bg-transparent aspect-square border-b border-r border-[#4F3457]/20"></div>
                                     }
 
-                                    const dateString = date.toISOString().split('T')[0]
+                                    // FIX: Use local date construction to avoid timezone issues with toISOString()
+                                    // toISOString() converts to UTC, which might shift the day back depending on timezone
+                                    const year = date.getFullYear()
+                                    const month = String(date.getMonth() + 1).padStart(2, '0')
+                                    const day = String(date.getDate()).padStart(2, '0')
+                                    const dateString = `${year}-${month}-${day}` // YYYY-MM-DD in local time
+
                                     const event = events.find(e => e.date === dateString)
                                     const dayNumber = date.getDate().toString().padStart(2, '0')
 

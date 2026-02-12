@@ -10,14 +10,15 @@ Follow these steps to set up the backend for your Community Polaroids gallery.
 4.  Copy and paste the following SQL code into a new query window and run it. This will create the table and the storage bucket with the necessary permissions.
 
 ```sql
--- 1. Create the Storage Bucket for Polaroids
+-- 1. Create the Storage Bucket for Photos
 insert into storage.buckets (id, name, public)
-values ('polaroids', 'polaroids', true);
+values ('photos', 'photos', true)
+on conflict (id) do nothing;
 
--- 2. Allow public access to view files in the 'polaroids' bucket
-create policy "Public Access"
+-- 2. Allow public access to view files in the 'photos' bucket
+create policy "Photos Public Access"
   on storage.objects for select
-  using ( bucket_id = 'polaroids' );
+  using ( bucket_id = 'photos' );
 
 -- 3. Allow authenticated users (or anyone if you prefer) to upload
 -- For simplicity in development, we'll allow public uploads here, 
@@ -26,7 +27,8 @@ create policy "Public Access"
 -- We only need a Select policy for the App to display images.
 
 -- 4. Create the Table to track the polaroids
-create table public.community_polaroids (
+-- 4. Create the Table to track the photos
+create table public.community_photos (
   id uuid not null default gen_random_uuid() primary key,
   created_at timestamptz default now(),
   storage_path text not null, -- The path/filename in the bucket
@@ -34,11 +36,11 @@ create table public.community_polaroids (
 );
 
 -- 5. Enable Row Level Security (RLS)
-alter table public.community_polaroids enable row level security;
+alter table public.community_photos enable row level security;
 
--- 6. Create Policy to allow everyone to VIEW the polaroid data
-create policy "Allow public read access"
-  on public.community_polaroids
+-- 6. Create Policy to allow everyone to VIEW the photo data
+create policy "Public Read Community Photos"
+  on public.community_photos
   for select
   using (true);
 ```
