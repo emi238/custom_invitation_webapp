@@ -78,7 +78,7 @@ export default function EventsSection() {
     const weekDays = ['mon', 'tues', 'weds', 'thurs', 'fri', 'sat', 'sun']
 
     return (
-        <section className="w-full bg-[#E6DDD8] pt-24 pb-16 relative px-4 md:px-8 flex flex-col justify-center overflow-hidden snap-start">
+        <section id="events" className="w-full bg-[#E6DDD8] pt-24 pb-16 relative px-4 md:px-8 flex flex-col justify-center overflow-hidden">
             {/* Reduced max-width to make grids smaller as requested (4xl) */}
             <div className="max-w-6xl mx-auto w-full flex flex-col">
                 <h2 className={`${inter.className} font-bold text-[#4F3457] text-3xl md:text-5xl mb-6 mt-[30px] lowercase tracking-tight shrink-0 pl-6 md:pl-8`}>
@@ -161,7 +161,7 @@ export default function EventsSection() {
                                     const dayNumber = date.getDate().toString().padStart(2, '0')
 
                                     // Format time from timestamp
-                                    const timeString = event ? new Date(event.event_timestamp).toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase() + ' AEST' : ''
+                                    const timeString = event ? new Date(event.event_timestamp).toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase() + ' (AEST)' + ' Start' : ''
 
                                     return (
                                         <div
@@ -202,7 +202,7 @@ export default function EventsSection() {
                                                             {timeString}
                                                         </p>
                                                         {event.address && (
-                                                            <p className={`${inter.className} text-[#4F3457] text-[8px] md:text-[10px] truncate`}>
+                                                            <p className={`${inter.className} text-[#4F3457] text-[8px] md:text-[10px] text-wrap`}>
                                                                 {event.address}
                                                             </p>
                                                         )}

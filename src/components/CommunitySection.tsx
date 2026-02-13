@@ -43,7 +43,7 @@ export default function CommunitySection() {
 
     return (
         <section
-            className="relative w-full h-[100vh] overflow-hidden flex flex-col items-center justify-center snap-start"
+            className="relative w-full h-[100vh] overflow-hidden flex flex-col items-center justify-center"
             style={{
                 background: 'linear-gradient(to bottom, #FFF5E2 40%, #E2D2EB 100%)'
             }}
@@ -68,7 +68,7 @@ export default function CommunitySection() {
 
                 {/* Liquid Glass Container with Photos */}
                 <div
-                    className="relative w-full max-w-[90rem] bg-white/5 backdrop-blur-[2px] border border-white/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.2)] rounded-[3rem] p-8 md:p-16 flex items-center justify-center mb-[-5rem]"
+                    className="relative w-full max-w-[90rem] bg-[#E2D2EB]/5 backdrop-blur-[2px] border border-white/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.2)] rounded-[3rem] p-8 md:p-16 flex items-center justify-center mb-[-5rem]"
                 >
                     <div className="flex flex-nowrap items-center justify-center gap-2 md:-space-x-4 lg:-space-x-8">
                         {displayItems.map((p, i) => (

@@ -5,6 +5,8 @@ import PolaroidGallery from '../../components/PolaroidGallery'
 import MissionVisionSection from '../../components/MissionVisionSection'
 import EventsSection from '../../components/EventsSection'
 import CommunitySection from '../../components/CommunitySection'
+import JoinCommunitySection from '../../components/JoinCommunitySection'
+import Footer from '../../components/Footer'
 
 export default function NewHomePage() {
     return (
@@ -74,6 +76,12 @@ export default function NewHomePage() {
 
             {/* Community Section */}
             <CommunitySection />
+
+            {/* Join Community Section */}
+            <JoinCommunitySection />
+
+            {/* Footer */}
+            <Footer />
         </main>
     )
 }

@@ -15,7 +15,7 @@ export default function NewHomeNavbar() {
 
     const navLinks = [
         { name: 'events', href: '/newhome#events' },
-        { name: 'community board', href: '/board' },
+        { name: 'community', href: '/board' },
         { name: 'our story', href: '/newhome#story' },
     ]
 
@@ -44,7 +44,7 @@ export default function NewHomeNavbar() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="hover:opacity-70 transition-opacity capitalize"
+                            className="hover:opacity-70 transition-opacity"
                             style={{ color: textColor }}
                         >
                             {link.name}
@@ -54,7 +54,7 @@ export default function NewHomeNavbar() {
                     {/* Join Us Button */}
                     <Link
                         href="/newhome#join" // Assuming join section exists or external link
-                        className="px-5 py-2 rounded-full font-medium transition-transform hover:scale-105 active:scale-95 capitalize"
+                        className="px-5 py-2 rounded-full font-medium transition-transform hover:scale-105 active:scale-95"
                         style={{
                             backgroundColor: buttonBgColor,
                             color: textColor
@@ -105,7 +105,7 @@ export default function NewHomeNavbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-2xl font-bold capitalize hover:opacity-70 transition-opacity"
+                                    className="text-2xl font-bold hover:opacity-70 transition-opacity"
                                     style={{ color: textColor }}
                                 >
                                     {link.name}
@@ -114,7 +114,7 @@ export default function NewHomeNavbar() {
                             <Link
                                 href="/newhome#join"
                                 onClick={() => setIsOpen(false)}
-                                className="px-8 py-3 rounded-full text-xl font-bold capitalize transition-transform hover:scale-105 active:scale-95"
+                                className="px-8 py-3 rounded-full text-xl font-bold transition-transform hover:scale-105 active:scale-95"
                                 style={{
                                     backgroundColor: buttonBgColor,
                                     color: textColor
