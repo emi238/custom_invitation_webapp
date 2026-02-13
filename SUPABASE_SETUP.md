@@ -2,46 +2,47 @@
 
 Follow these instructions to set up your Supabase database and storage for Community Events.
 
-## 1. Create the Database Table
+## 1. Update the Database Schema
 
-Run the following SQL query in your [Supabase SQL Editor](https://supabase.com/dashboard/project/_/sql) to create the `upcoming_events` table.
+Since your table already exists, run these `ALTER TABLE` commands in the [Supabase SQL Editor](https://supabase.com/dashboard/project/_/sql) to update the columns.
 
 ```sql
--- Create the upcoming_events table
+-- 1. Remove the old text/date columns
+alter table public.upcoming_events 
+  drop column if exists time,
+  drop column if exists date;
+
+-- 2. Add the new timestamp column
+alter table public.upcoming_events 
+  add column if not exists event_timestamp timestamptz;
+```
+
+_(Reference: If you were creating this table from scratch, the definition would be:)_
+
+```sql
+/*
 create table public.upcoming_events (
   id uuid primary key default uuid_generate_v4(),
   created_at timestamp with time zone default now(),
   event_title text not null,
-  date date not null,
-  time text,
+  event_timestamp timestamptz not null,
   address text,
-  link text, -- RSVP Link
-  photo_url text -- URL to the image in Storage
+  link text,
+  photo_url text
 );
+*/
+```
 
+### RLS Policies (Ensure these exist)
+
+```sql
 -- Enable Row Level Security (RLS)
 alter table public.upcoming_events enable row level security;
 
 -- Create Policy: Allow Public Read Access (Anyone can view events)
 create policy "Allow Public Read Access"
-on public.upcoming_events
-for select
-to public
-using (true);
+on public.upcoming_events for select to public using (true);
 
--- Create Policy: Allow Authenticated/Service Role Insert/Update (For admins/server actions)
-create policy "Allow Authenticated Insert"
-on public.upcoming_events
-for insert
-to public -- Changing to public for now so you can easily test, or restrict to authenticated
-with check (true);
-
-create policy "Allow Authenticated Update"
-on public.upcoming_events
-for update
-to public
-using (true);
-```
 
 ## 2. Set Up Storage for Photos
 

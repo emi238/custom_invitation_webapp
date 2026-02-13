@@ -59,6 +59,48 @@ export async function getPublicEvents() {
     }
 }
 
+export async function getUpcomingEvents() {
+    const supabase = getSupabase()
+
+    try {
+        const { data, error } = await supabase
+            .from('upcoming_events')
+            .select('*')
+            .order('event_timestamp', { ascending: true })
+
+        if (error) {
+            console.error('Supabase Error (Get Upcoming Events):', error)
+            return []
+        }
+
+        if (!data) return []
+
+        // Process photo URLs
+        // If the user manually stored "filename.jpg", we need to convert to full public URL
+        const events = data.map(event => {
+            let finalPhotoUrl = event.photo_url?.trim()
+
+            // If it doesn't start with http, assume it's a file path in the bucket
+            if (finalPhotoUrl && !finalPhotoUrl.startsWith('http')) {
+                const { data: { publicUrl } } = supabase.storage
+                    .from('event_thumbnails')
+                    .getPublicUrl(finalPhotoUrl)
+                finalPhotoUrl = publicUrl
+            }
+
+            return {
+                ...event,
+                photo_url: finalPhotoUrl
+            }
+        })
+
+        return events
+    } catch (err) {
+        console.error('Unexpected Error (Get Upcoming Events):', err)
+        return []
+    }
+}
+
 // --- Invitations ---
 
 export async function getInvitation(slug: string) {

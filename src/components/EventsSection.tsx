@@ -2,15 +2,14 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import { supabase } from '../lib/supabase'
+import { getUpcomingEvents } from '@/app/actions'
 
 const inter = Inter({ subsets: ['latin'] })
 
 interface EventInfo {
     id: string
-    date: string // YYYY-MM-DD
+    event_timestamp: string // ISO string from Supabase (timestamptz)
     event_title: string
-    time: string
     photo_url: string
     address: string
     link: string
@@ -25,14 +24,13 @@ export default function EventsSection() {
     // Fetch events from Supabase
     useEffect(() => {
         const fetchEvents = async () => {
-            const { data, error } = await supabase
-                .from('upcoming_events')
-                .select('*')
-
-            if (error) {
+            try {
+                const data = await getUpcomingEvents()
+                if (data) {
+                    setEvents(data)
+                }
+            } catch (error) {
                 console.error('Error fetching events:', error)
-            } else if (data) {
-                setEvents(data)
             }
         }
         fetchEvents()
@@ -63,6 +61,16 @@ export default function EventsSection() {
             days.push(new Date(year, month, i))
         }
         return days
+    }
+
+    const formatDateWithSuffix = (date: Date) => {
+        const day = date.getDate()
+        const month = date.toLocaleString('default', { month: 'long' })
+        let suffix = 'th'
+        if (day % 10 === 1 && day !== 11) suffix = 'st'
+        else if (day % 10 === 2 && day !== 12) suffix = 'nd'
+        else if (day % 10 === 3 && day !== 13) suffix = 'rd'
+        return `${day}${suffix} of ${month}`
     }
 
     const days = getDaysInMonth(currentDate)
@@ -142,8 +150,18 @@ export default function EventsSection() {
                                     const day = String(date.getDate()).padStart(2, '0')
                                     const dateString = `${year}-${month}-${day}` // YYYY-MM-DD in local time
 
-                                    const event = events.find(e => e.date === dateString)
+                                    // Match event by checking if they are on the same local day
+                                    // 2026-01-29 08:00:00+00 should show up on Jan 29th locally
+                                    const event = events.find(e => {
+                                        if (!e.event_timestamp) return false
+                                        const eventDate = new Date(e.event_timestamp)
+                                        return eventDate.toDateString() === date.toDateString()
+                                    })
+
                                     const dayNumber = date.getDate().toString().padStart(2, '0')
+
+                                    // Format time from timestamp
+                                    const timeString = event ? new Date(event.event_timestamp).toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase() + ' AEST' : ''
 
                                     return (
                                         <div
@@ -170,19 +188,27 @@ export default function EventsSection() {
                                                         />
                                                     </div>
 
-                                                    {/* Hover Overlay - Reduced Text */}
+                                                    {/* Hover Overlay */}
                                                     <div
                                                         className={`absolute inset-0 bg-[#E6DDD8]/95 backdrop-blur-sm p-1 flex flex-col justify-center gap-0.5 transition-opacity duration-300 rounded-sm overflow-hidden ${hoveredEventId === event.id ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                                                     >
-                                                        <h4 className={`${inter.className} text-[#4F3457] font-bold text-[8px] md:text-[10px] leading-tight line-clamp-2`}>
+                                                        <h4 className={`${inter.className} text-[#4F3457] font-bold text-[10px] md:text-[15px] leading-tight line-clamp-2`}>
                                                             {event.event_title}
                                                         </h4>
-                                                        <p className={`${inter.className} text-[#4F3457] text-[6px] md:text-[8px]`}>
-                                                            {event.time}
+                                                        <p className={`${inter.className} text-[#4F3457] text-[8px] md:text-[10px]`}>
+                                                            {formatDateWithSuffix(new Date(event.event_timestamp))}
                                                         </p>
+                                                        <p className={`${inter.className} text-[#4F3457] text-[8px] md:text-[10px]`}>
+                                                            {timeString}
+                                                        </p>
+                                                        {event.address && (
+                                                            <p className={`${inter.className} text-[#4F3457] text-[8px] md:text-[10px] truncate`}>
+                                                                {event.address}
+                                                            </p>
+                                                        )}
                                                         {event.link && (
-                                                            <span className={`${inter.className} text-[#8F7CB7] text-[6px] md:text-[8px] font-bold underline`}>
-                                                                RSVP
+                                                            <span className={`${inter.className} text-[#8F7CB7] text-[8px] md:text-[11px] font-bold underline`}>
+                                                                See event details!
                                                             </span>
                                                         )}
                                                     </div>
