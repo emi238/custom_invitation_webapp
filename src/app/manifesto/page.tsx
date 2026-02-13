@@ -104,16 +104,16 @@ export default function ManifestoPage() {
         <main className="min-h-screen bg-[#462E61] text-[#E8A87C] overflow-x-hidden selection:bg-[#E8A87C] selection:text-[#462E61]">
             {/* Nav / Back Button */}
             {/* Navigation */}
-            <Navbar theme="dark" />
+            <Navbar />
 
             {/* Back to Home Button */}
-            <Link href="/home" className="fixed top-20 left-8 z-40 flex items-center gap-2 text-[#E8A87C]/50 hover:text-[#E8A87C] transition-colors">
+            <Link href="/home" className="fixed top-[120px] left-8 md:left-24 z-40 flex items-center gap-2 text-[#E8A87C]/50 hover:text-[#E8A87C] transition-colors">
                 <ArrowLeft size={16} />
                 <span className="text-xs font-bold tracking-widest uppercase">Back to Home</span>
             </Link>
 
             {/* The Manifesto Label */}
-            <div className="fixed top-20 right-8 z-40 text-[#E8A87C]/50 text-xs font-bold tracking-widest uppercase pointer-events-none">
+            <div className="fixed top-[120px] right-8 md:right-24 z-40 text-[#E8A87C]/50 text-xs font-bold tracking-widest uppercase pointer-events-none">
                 The Manifesto
             </div>
 

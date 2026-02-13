@@ -1,96 +1,74 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-interface NavbarProps {
-    theme?: 'light' | 'dark'
-}
-
-export default function Navbar({ theme = 'light' }: NavbarProps) {
+export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const pathname = usePathname()
-    const router = useRouter()
+    const isBoard = pathname?.startsWith('/board')
+    const isManifesto = pathname === '/manifesto'
 
-    // Configuration based on theme
-    const isLight = theme === 'light'
-    const textColor = isLight ? '#5e4175' : '#E8A87C'
-    const bgColor = isLight ? 'bg-white/20' : 'bg-[#462E61]/80'
-    const borderColor = isLight ? 'border-white/10' : 'border-white/10'
-    const mobileMenuBg = isLight ? 'bg-[#FFF5EB]' : 'bg-[#462E61]'
-
-    // Custom Smooth Scroll Logic
-    const smoothScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-        // Close mobile menu if open
-        setIsOpen(false)
-
-        // If we are not on the home page, allow default navigation to /home#id
-        if (pathname !== '/home' && pathname !== '/') {
-            return
-        }
-
-        e.preventDefault()
-        const targetId = id.replace('#', '')
-        const element = document.getElementById(targetId)
-        if (!element) return
-
-        // Align the bottom of the section to the bottom of the viewport
-        const elementRect = element.getBoundingClientRect()
-        const elementBottom = elementRect.bottom + window.scrollY
-        const offsetPosition = elementBottom - window.innerHeight
-
-        const startPosition = window.scrollY
-        const distance = offsetPosition - startPosition
-        const duration = 1500 // 1.5s duration
-        let start: number | null = null
-
-        const animation = (currentTime: number) => {
-            if (start === null) start = currentTime
-            const timeElapsed = currentTime - start
-            const run = ease(timeElapsed, startPosition, distance, duration)
-            window.scrollTo(0, run)
-            if (timeElapsed < duration) requestAnimationFrame(animation)
-        }
-
-        // Ease in-out quadratic function
-        const ease = (t: number, b: number, c: number, d: number) => {
-            t /= d / 2
-            if (t < 1) return (c / 2) * t * t + b
-            t--
-            return (-c / 2) * (t * (t - 2) - 1) + b
-        }
-
-        requestAnimationFrame(animation)
-    }
+    // Configuration
+    // Configuration
+    const textColor = isManifesto ? '#E8A87C' : '#5E4175'
+    // User requested #3D2654 for manifesto navbar background (liquid glass)
+    const barBgColor = isManifesto ? 'rgba(61, 38, 84, 0.1)' : 'rgba(226, 210, 235, 0.3)' // 
+    // User requested #F7E3BD transparent for manifesto, keeping liquid glass feel for the button
+    const buttonBgColor = isManifesto ? 'rgba(247, 227, 189, 0.7)' : '#E2D2EB'
 
     const navLinks = [
-        { name: 'events', href: '/home#events', id: '#events' },
-        { name: 'community board', href: '/board', id: null },
-        { name: 'join us', href: '/home#join', id: '#join' },
+        { name: 'events', href: '/home#events' },
+        { name: 'community board', href: '/board' },
+        { name: 'our story', href: '/manifesto' },
     ]
 
     return (
         <>
-            <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 ${bgColor} backdrop-blur-xl border-b ${borderColor} shadow-sm transition-all duration-300`}>
-                <Link href="/home" className="text-xl font-bold tracking-tight" style={{ color: textColor }}>
+            <motion.nav
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`fixed top-[27px] left-0 right-0 z-50 flex items-center justify-between px-6 py-2 mx-8 ${isBoard ? 'md:mx-12' : isManifesto ? 'md:mx-24' : 'md:mx-32'} rounded-full backdrop-blur-md transition-all duration-300`}
+                style={{
+                    backgroundColor: barBgColor,
+                    // 'liquid glass' effect - subtle border and shadow could enhance this
+                    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                }}
+            >
+                {/* Logo */}
+                <Link href="/home" className="text-xl font-bold tracking-tight uppercase" style={{ color: textColor }}>
                     HYPHAE
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-6 font-medium text-sm" style={{ color: textColor }}>
+                <div className="hidden md:flex items-center gap-6 font-medium text-sm">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            onClick={(e) => link.id ? smoothScrollTo(e as any, link.id) : undefined}
                             className="hover:opacity-70 transition-opacity"
+                            style={{ color: textColor }}
                         >
                             {link.name}
                         </Link>
                     ))}
+
+                    {/* Join Us Button */}
+                    <Link
+                        href="/home#join" // Assuming join section exists or external link
+                        className={`px-5 py-2 rounded-full font-medium transition-transform hover:scale-105 active:scale-95 ${isManifesto ? 'backdrop-blur-md' : ''}`}
+                        style={{
+                            backgroundColor: buttonBgColor,
+                            color: isManifesto ? '#3D2654' : textColor
+                        }}
+                    >
+                        join us
+                    </Link>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -101,7 +79,7 @@ export default function Navbar({ theme = 'light' }: NavbarProps) {
                 >
                     <Menu size={24} />
                 </button>
-            </nav>
+            </motion.nav>
 
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
@@ -110,12 +88,12 @@ export default function Navbar({ theme = 'light' }: NavbarProps) {
                         initial={{ opacity: 0, x: '100%' }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
-                        transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                        className={`fixed inset-0 z-[60] flex flex-col ${mobileMenuBg}`}
+                        transition={{ type: "spring", bounce: 0, duration: 0.15 }}
+                        className="fixed inset-0 z-[60] flex flex-col bg-[#FFF5EB]"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between px-8 py-4 border-b border-white/10">
-                            <Link href="/home" onClick={() => setIsOpen(false)} className="text-xl font-bold tracking-tight" style={{ color: textColor }}>
+                        <div className="flex items-center justify-between px-8 py-6 border-b border-black/5">
+                            <Link href="/home" onClick={() => setIsOpen(false)} className="text-xl font-bold tracking-tight uppercase" style={{ color: textColor }}>
                                 HYPHAE
                             </Link>
                             <button
@@ -133,13 +111,24 @@ export default function Navbar({ theme = 'light' }: NavbarProps) {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    onClick={(e) => link.id ? smoothScrollTo(e as any, link.id) : setIsOpen(false)}
-                                    className="text-2xl font-bold capitalize hover:opacity-70 transition-opacity"
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-2xl font-bold hover:opacity-70 transition-opacity"
                                     style={{ color: textColor }}
                                 >
                                     {link.name}
                                 </Link>
                             ))}
+                            <Link
+                                href="/home#join"
+                                onClick={() => setIsOpen(false)}
+                                className="px-8 py-3 rounded-full text-xl font-bold transition-transform hover:scale-105 active:scale-95"
+                                style={{
+                                    backgroundColor: buttonBgColor,
+                                    color: textColor
+                                }}
+                            >
+                                join us
+                            </Link>
                         </div>
                     </motion.div>
                 )}

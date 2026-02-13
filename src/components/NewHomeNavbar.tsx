@@ -10,7 +10,7 @@ export default function NewHomeNavbar() {
 
     // Configuration
     const textColor = '#5E4175'
-    const barBgColor = 'rgba(226, 210, 235, 0.3)' // #E2D2EB at 30%
+    const barBgColor = 'rgba(226, 210, 235, 0.3)'
     const buttonBgColor = '#E2D2EB'
 
     const navLinks = [

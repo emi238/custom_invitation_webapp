@@ -13,7 +13,7 @@ export default function BoardLayout({ children }: { children: React.ReactNode })
                 />
             </div>
 
-            <Navbar theme="light" />
+            <Navbar />
 
             <main className="flex-1 relative z-10 pt-24 pb-8 px-4 md:px-12 flex flex-col md:flex-row gap-8 max-w-[1600px] mx-auto w-full h-[calc(100vh)]">
                 {/* Left Sidebar */}
