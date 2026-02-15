@@ -16,9 +16,9 @@ export default function Navbar() {
     // Configuration
     const textColor = isManifesto ? '#E8A87C' : '#5E4175'
     // User requested #3D2654 for manifesto navbar background (liquid glass)
-    const barBgColor = isManifesto ? 'rgba(61, 38, 84, 0.1)' : 'rgba(226, 210, 235, 0.3)' // 
+    const barBgColor = isBoard ? 'transparent' : (isManifesto ? 'rgba(61, 38, 84, 0.1)' : 'rgba(226, 210, 235, 0.3)') // 
     // User requested #F7E3BD transparent for manifesto, keeping liquid glass feel for the button
-    const buttonBgColor = isManifesto ? 'rgba(247, 227, 189, 0.7)' : '#E2D2EB'
+    const buttonBgColor = isManifesto ? 'rgba(247, 227, 189, 0.8)' : '#E2D2EB'
 
     const navLinks = [
         { name: 'events', href: '/home#events' },
@@ -35,8 +35,8 @@ export default function Navbar() {
                 className={`fixed top-[27px] left-0 right-0 z-50 flex items-center justify-between px-6 py-2 mx-8 ${isBoard ? 'md:mx-12' : isManifesto ? 'md:mx-24' : 'md:mx-32'} rounded-full backdrop-blur-md transition-all duration-300`}
                 style={{
                     backgroundColor: barBgColor,
-                    // 'liquid glass' effect - subtle border and shadow could enhance this
-                    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                    // 'liquid glass' effect 
+                    boxShadow: isBoard ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : '0 4px 30px rgba(0, 0, 0, 0.1)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                 }}
             >
@@ -60,7 +60,16 @@ export default function Navbar() {
 
                     {/* Join Us Button */}
                     <Link
-                        href="/home#join" // Assuming join section exists or external link
+                        href="/home#join"
+                        onClick={(e) => {
+                            if (pathname === '/home') {
+                                e.preventDefault();
+                                const element = document.getElementById('join');
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                                }
+                            }
+                        }}
                         className={`px-5 py-2 rounded-full font-medium transition-transform hover:scale-105 active:scale-95 ${isManifesto ? 'backdrop-blur-md' : ''}`}
                         style={{
                             backgroundColor: buttonBgColor,
@@ -120,7 +129,16 @@ export default function Navbar() {
                             ))}
                             <Link
                                 href="/home#join"
-                                onClick={() => setIsOpen(false)}
+                                onClick={(e) => {
+                                    setIsOpen(false);
+                                    if (pathname === '/home') {
+                                        e.preventDefault();
+                                        const element = document.getElementById('join');
+                                        if (element) {
+                                            element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                                        }
+                                    }
+                                }}
                                 className="px-8 py-3 rounded-full text-xl font-bold transition-transform hover:scale-105 active:scale-95"
                                 style={{
                                     backgroundColor: buttonBgColor,

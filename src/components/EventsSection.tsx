@@ -79,7 +79,6 @@ export default function EventsSection() {
 
     return (
         <section id="events" className="w-full bg-[#E6DDD8] pt-24 pb-16 relative px-4 md:px-8 flex flex-col justify-center overflow-hidden">
-            {/* Reduced max-width to make grids smaller as requested (4xl) */}
             <div className="max-w-6xl mx-auto w-full flex flex-col">
                 <h2 className={`${inter.className} font-bold text-[#4F3457] text-3xl md:text-5xl mb-6 mt-[30px] lowercase tracking-tight shrink-0 pl-6 md:pl-8`}>
                     our events

@@ -222,7 +222,7 @@ export default function PolaroidGallery() {
                     style={{ y: overlayY }}
                     className="absolute inset-x-0 bottom-0 h-full z-20 flex flex-col items-center justify-center pt-24 md:pt-40 text-center"
                 >
-                    <div className="absolute inset-0 bg-white/20 backdrop-blur-xs rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-white/30"></div>
+                    <div className="absolute inset-0 bg-white/10 backdrop-blur-xs rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-white/30"></div>
 
                     <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-2">
                         <h2 className={`${inter.className} font-bold text-[#5E4175] text-2xl md:text-7xl leading-none tracking-tight`}>

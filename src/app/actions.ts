@@ -14,7 +14,7 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 // We use a getter or simple client creation to ensure we pick up the env vars at runtime if needed.
-const getSupabase = () => createClient(supabaseUrl!, supabaseKey!)
+const getSupabase = () => createClient(supabaseUrl?.trim()!, supabaseKey?.trim()!)
 
 // --- Community Signups ---
 
@@ -170,6 +170,7 @@ export async function getCommunityPhotos() {
         const { data, error } = await supabase
             .from('community_photos')
             .select('*')
+            .order('created_at', { ascending: false })
 
         if (error) {
             console.error('Supabase Error (Get Community Photos):', error)
