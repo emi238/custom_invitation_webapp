@@ -16,11 +16,18 @@ export default function Home() {
             {/* Hero Section */}
             <section className="relative h-[100dvh] w-full overflow-hidden snap-start">
                 {/* Background Image */}
-                <div className="absolute inset-0 z-0 flex justify-center items-start md:block">
+                <div className="absolute inset-0 z-0 flex justify-center items-start">
+                    {/* Mobile Image */}
+                    <img
+                        src="/hero_mobile.JPG"
+                        alt="Hero Background Mobile"
+                        className="absolute inset-0 w-full h-full object-cover object-top block md:hidden"
+                    />
+                    {/* Desktop Image */}
                     <img
                         src="/hero_image.png"
-                        alt="Hero Background"
-                        className="absolute inset-0 w-full h-full object-cover object-top"
+                        alt="Hero Background Desktop"
+                        className="absolute inset-0 w-full h-full object-cover object-top hidden md:block"
                     />
                 </div>
 
@@ -48,9 +55,9 @@ export default function Home() {
                     </div>
 
                     {/* Main Title - Bottom (No Padding, Left Aligned) */}
-                    <div className="w-full mt-auto mb-4 md:mb-2">
+                    <div className="w-full mt-auto mb-0 md:mb-2">
                         <h1
-                            className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left md:-mb-[5vh]"
+                            className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left md:-mb-[1vh]"
                             style={{
                                 color: 'rgba(226, 210, 235, 0.8)',
                                 fontSize: '15vw',
