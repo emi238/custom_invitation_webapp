@@ -25,7 +25,7 @@ export default function NewHomeNavbar() {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="fixed top-8 left-0 right-0 z-50 flex items-center justify-between px-6 py-2 mx-8 md:mx-32 rounded-full backdrop-blur-md"
+                className="fixed top-8 left-0 right-0 z-50 flex items-center justify-between px-6 py-0.5 md:py-2 mx-8 md:mx-32 rounded-full backdrop-blur-md"
                 style={{
                     backgroundColor: barBgColor,
                     // 'liquid glass' effect - subtle border and shadow could enhance this
@@ -66,7 +66,7 @@ export default function NewHomeNavbar() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden p-2 rounded-full hover:bg-black/5 transition-colors"
+                    className="md:hidden p-1 rounded-full hover:bg-black/5 transition-colors"
                     onClick={() => setIsOpen(true)}
                     style={{ color: textColor }}
                 >
