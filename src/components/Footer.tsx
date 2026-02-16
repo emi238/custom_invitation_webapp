@@ -46,17 +46,17 @@ export default function Footer() {
 
     return (
         <footer className="py-8 px-4 bg-[#C2A2CE] overflow-hidden">
-            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
+            <div className="w-full flex flex-row justify-between items-start md:items-center gap-2 md:gap-12">
                 <div className="flex-1">
                     <h2
-                        className="text-8xl md:text-[7rem] font-bold tracking-tighter leading-none"
+                        className="text-[3rem] md:text-[7rem] font-bold tracking-tighter leading-none"
                         style={{ fontFamily: sansFont, color: '#4F3457' }}
                     >
                         HYPHAE
                     </h2>
                 </div>
 
-                <div className="flex gap-12 md:gap-16 text-[#4F3457] text-m font-medium pr-4 md:pr-12">
+                <div className="flex justify-end md:justify-start gap-4 md:gap-16 text-[#4F3457] text-xs md:text-base font-medium pr-0 md:pr-12">
                     <div className="flex flex-col gap-1">
                         <h4 className="font-bold mb-1 text-black">Community</h4>
                         <Link href="/home#definition" onClick={(e) => handleScroll(e, 'definition')} className="hover:opacity-70 transition-opacity">What is Hyphae?</Link>

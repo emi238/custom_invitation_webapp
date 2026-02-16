@@ -42,11 +42,11 @@ export default function JoinCommunitySection() {
                 {/* Glass Container */}
                 <div className="w-full bg-white/0 backdrop-blur-[2px] border border-white/20 rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 flex flex-col items-center gap-8 shadow-sm">
                     {/* Title */}
-                    <h2 className={`${inter.className} font-bold text-5xl md:text-[60px] text-[#4F3457] leading-tight tracking-tight`}>
+                    <h2 className={`${inter.className} font-bold text-[2rem] md:text-[2.5rem] text-[#4F3457] leading-tight tracking-tight`}>
                         join the community
                     </h2>
                     {/* Description */}
-                    <p className={`${inter.className} font-medium text-xl md:text-[20px] text-[#3D2654] leading-relaxed max-w-2xl`}>
+                    <p className={`${inter.className} font-medium text-[1rem] md:text-[1.125rem] text-[#3D2654] leading-relaxed max-w-2xl`}>
                         We believe that entrepreneurship was never meant to be lonely. In Hyphae, you no longer need to build alone. Come join us!
                     </p>
 
@@ -58,12 +58,12 @@ export default function JoinCommunitySection() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className={`${inter.className} w-full px-6 py-3 md:py-4 rounded-xl bg-[#E6DDD8] border border-[#4F3457]/20 text-[#4F3457] placeholder-[#4F3457]/50 focus:outline-none focus:ring-2 focus:ring-[#71588A] transition-all text-center md:text-left md:pr-36 text-base`}
+                            className={`${inter.className} w-full px-6 py-3 md:py-4 rounded-xl bg-[#E6DDD8] border border-[#4F3457]/20 text-[#4F3457] placeholder-[#4F3457]/50 focus:outline-none focus:ring-2 focus:ring-[#71588A] transition-all text-center md:text-left md:pr-36 text-[0.875rem] md:text-[1rem]`}
                         />
                         <button
                             type="submit"
                             disabled={status === 'loading' || status === 'success'}
-                            className={`${inter.className} w-full md:absolute md:right-2 md:top-2 md:bottom-2 md:w-auto md:px-6 py-3 md:py-0 rounded-xl md:rounded-lg font-bold text-white text-base transition-all shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed bg-[#917DB8] hover:bg-[#71588A] whitespace-nowrap`}
+                            className={`${inter.className} w-full md:absolute md:right-2 md:top-2 md:bottom-2 md:w-auto md:px-6 py-3 md:py-0 rounded-xl md:rounded-lg font-bold text-white text-[0.875rem] md:text-[1rem] transition-all shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed bg-[#917DB8] hover:bg-[#71588A] whitespace-nowrap`}
                         >
                             {status === 'loading' ? '...' : status === 'success' ? 'Joined!' : 'Join'}
                         </button>

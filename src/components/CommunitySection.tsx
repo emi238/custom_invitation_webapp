@@ -12,8 +12,8 @@ const LAYOUT_DESKTOP = {
     RADIUS: 1500,
     ANGLE_STEP: 10,
     ARC_CENTER_Y: 1300,
-    OFFSET_X: 120, // w-60 = 240px / 2
-    OFFSET_Y: 152  // h-76 = 304px / 2
+    OFFSET_X: 120,
+    OFFSET_Y: 152
 };
 
 const LAYOUT_MOBILE = {
