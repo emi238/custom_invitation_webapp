@@ -11,13 +11,17 @@ const inter = Inter({ subsets: ['latin'] })
 const LAYOUT_DESKTOP = {
     RADIUS: 1500,
     ANGLE_STEP: 10,
-    ARC_CENTER_Y: 1300
+    ARC_CENTER_Y: 1300,
+    OFFSET_X: 120, // w-60 = 240px / 2
+    OFFSET_Y: 152  // h-76 = 304px / 2
 };
 
 const LAYOUT_MOBILE = {
-    RADIUS: 900,
-    ANGLE_STEP: 15,
-    ARC_CENTER_Y: 700
+    RADIUS: 550,
+    ANGLE_STEP: 22,
+    ARC_CENTER_Y: 500,
+    OFFSET_X: 104,
+    OFFSET_Y: 128
 };
 
 const COLOR_SOLID = '#F8F8F8';
@@ -33,9 +37,9 @@ function PolaroidCard({
     index: number,
     rotation: any,
     totalCount: number,
-    layout: { RADIUS: number, ANGLE_STEP: number, ARC_CENTER_Y: number }
+    layout: { RADIUS: number, ANGLE_STEP: number, ARC_CENTER_Y: number, OFFSET_X: number, OFFSET_Y: number }
 }) {
-    const { RADIUS, ANGLE_STEP, ARC_CENTER_Y } = layout;
+    const { RADIUS, ANGLE_STEP, ARC_CENTER_Y, OFFSET_X, OFFSET_Y } = layout;
 
     // Center the collection around -90 degrees
     const totalSpread = (totalCount - 1) * ANGLE_STEP;
@@ -46,10 +50,13 @@ function PolaroidCard({
     const angleDeg = useTransform(rotation, (r: number) => baseAngleDeg + r);
     const angleRad = useTransform(angleDeg, (d: number) => d * (Math.PI / 180));
 
-    const x = useTransform(angleRad, (a: number) => RADIUS * Math.cos(a));
-    const y = useTransform(angleRad, (a: number) => ARC_CENTER_Y + RADIUS * Math.sin(a));
+    const x = useTransform(angleRad, (a: number) => RADIUS * Math.cos(a) - OFFSET_X);
+    const y = useTransform(angleRad, (a: number) => ARC_CENTER_Y + RADIUS * Math.sin(a) - OFFSET_Y);
 
-    // Rotate card to be tangent + 90deg
+    // Rotate card based on position: 
+    // Left side (entering) -> rotate left (-)
+    // Center -> 0
+    // Right side (exiting) -> rotate right (+)
     const rotate = useTransform(angleDeg, (d: number) => d + 90);
 
     // Fade out edges
