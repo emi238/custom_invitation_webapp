@@ -128,10 +128,11 @@ export default function CommunitySection() {
         const handleResize = () => {
             if (window.innerWidth < 768) {
                 setLayout(LAYOUT_MOBILE);
-                setAutoScrollSpeed(0.1);
+                // "Right to left slowly" -> Negative speed, small value
+                setAutoScrollSpeed(-0.02);
             } else {
                 setLayout(LAYOUT_DESKTOP);
-                setAutoScrollSpeed(0);
+                setAutoScrollSpeed(-0.02);
             }
         };
         handleResize();

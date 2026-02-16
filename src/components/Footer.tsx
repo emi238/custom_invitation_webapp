@@ -34,10 +34,7 @@ export default function Footer() {
             }
 
             const ease = (t: number, b: number, c: number, d: number) => {
-                t /= d / 2
-                if (t < 1) return (c / 2) * t * t + b
-                t--
-                return (-c / 2) * (t * (t - 2) - 1) + b
+                return c * (t / d) + b
             }
 
             requestAnimationFrame(animation)
@@ -59,9 +56,9 @@ export default function Footer() {
                 <div className="flex justify-end md:justify-start gap-4 md:gap-16 text-[#4F3457] text-xs md:text-base font-medium pr-0 md:pr-12">
                     <div className="flex flex-col gap-1">
                         <h4 className="font-bold mb-1 text-black">Community</h4>
-                        <Link href="/home#definition" onClick={(e) => handleScroll(e, 'definition')} className="hover:opacity-70 transition-opacity">What is Hyphae?</Link>
-                        <Link href="/home#definition" onClick={(e) => handleScroll(e, 'definition')} className="hover:opacity-70 transition-opacity">Who We Are</Link>
-                        <Link href="/home#our-mission" onClick={(e) => handleScroll(e, 'our-mission')} className="hover:opacity-70 transition-opacity">Mission</Link>
+                        <Link href="/home#hero" onClick={(e) => handleScroll(e, 'hero')} className="hover:opacity-70 transition-opacity">What is Hyphae?</Link>
+                        <Link href="/home#who-we-are" onClick={(e) => handleScroll(e, 'who-we-are')} className="hover:opacity-70 transition-opacity">Who We Are</Link>
+                        <Link href="/home#mission" onClick={(e) => handleScroll(e, 'mission')} className="hover:opacity-70 transition-opacity">Mission</Link>
                     </div>
                     <div className="flex flex-col gap-1">
                         <h4 className="font-bold mb-1 text-black">Connect</h4>

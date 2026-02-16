@@ -14,7 +14,7 @@ export default function Home() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative h-[100dvh] w-full overflow-hidden snap-start">
+            <section id="hero" className="relative h-[100dvh] w-full overflow-hidden">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0 flex justify-center items-start">
                     {/* Mobile Image */}
@@ -72,34 +72,30 @@ export default function Home() {
             </section>
 
             {/* Polaroid Gallery Section */}
-            <div className="snap-start w-full">
+            <div id="who-we-are">
                 <PolaroidGallery />
             </div>
 
             {/* Mission & Vision Section */}
-            <div className="snap-start w-full">
+            <div id="mission">
                 <MissionVisionSection />
             </div>
 
             {/* Events Section */}
-            <div className="snap-start w-full">
+            <div id="events">
                 <EventsSection />
             </div>
 
             {/* Community Section */}
-            <div className="snap-start w-full">
-                <CommunitySection />
-            </div>
+            <CommunitySection />
 
             {/* Join Community Section */}
-            <div className="snap-start w-full">
+            <div id="join">
                 <JoinCommunitySection />
             </div>
 
             {/* Footer */}
-            <div className="snap-start w-full">
-                <Footer />
-            </div>
+            <Footer />
         </main>
     )
 }
