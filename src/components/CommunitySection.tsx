@@ -13,7 +13,7 @@ const LAYOUT_DESKTOP = {
     ANGLE_STEP: 10,
     ARC_CENTER_Y: 1300,
     OFFSET_X: 120,
-    OFFSET_Y: 152
+    OFFSET_Y: 45
 };
 
 const LAYOUT_MOBILE = {
@@ -260,7 +260,7 @@ export default function CommunitySection() {
         const x = clientX - currentTarget.getBoundingClientRect().left;
 
         // Zones
-        const zoneSize = width * 0.25; // 25% edge zones
+        const zoneSize = width * 0.10; // 25% edge zones
 
         if (x < zoneSize) {
             // Left Zone -> Move Right (Positive Rotation)

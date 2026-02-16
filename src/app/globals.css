@@ -178,3 +178,13 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
+
+/* Mobile/Tablet Scroll Snap */
+@media (max-width: 1024px) {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 60px;
+    /* Navbar offset */
+    scroll-behavior: smooth;
+  }
+}
