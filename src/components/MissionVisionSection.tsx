@@ -36,7 +36,7 @@ export default function MissionVisionSection() {
             </div>
 
             {/* Mission/Vision Container */}
-            <div className="flex-grow flex items-center md:items-end justify-center px-4 md:px-8 z-20 pb-0 mt-2 md:mt-12 mb-8 md:mb-0">
+            <div className="flex-grow flex items-center md:items-end justify-center px-4 md:px-8 z-20 pb-0 mt-2 md:mt-10 mb-8 md:mb-0">
                 <div className="relative w-full max-w-[1200px] bg-white/20 backdrop-blur-md border border-white/40 border-b-0 rounded-t-[2rem] md:rounded-t-[2.5rem] rounded-b-[2rem] md:rounded-b-none p-4 md:p-8 pb-4 md:pb-0 shadow-xl h-full flex flex-col justify-center">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 h-full">
                         {/* Mission Card */}

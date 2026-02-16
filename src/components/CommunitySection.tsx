@@ -127,13 +127,12 @@ export default function CommunitySection() {
                 setAutoScrollSpeed(0);
             }
         };
-        // Initial check
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Animation Loop with Bounds
+    // Animation Loop
     useEffect(() => {
         let lastTime = performance.now();
         let frameId: number;
