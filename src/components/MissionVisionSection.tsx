@@ -16,7 +16,7 @@ export default function MissionVisionSection() {
             }}
         >
             {/* Stats Row */}
-            <div className={`max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center mt-16 md:mt-32 relative z-20`}>
+            <div className={`max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center mt-32 md:mt-32 relative z-20`}>
                 <div className="flex flex-col items-center">
                     <span className={`${dmSans.className} text-[#5E4175] text-2xl md:text-4xl lg:text-5xl font-bold`}>1</span>
                     <span className="text-white text-base md:text-xl mt-2 font-medium tracking-wide">Community</span>
@@ -36,21 +36,21 @@ export default function MissionVisionSection() {
             </div>
 
             {/* Mission/Vision Container */}
-            <div className="flex-grow flex items-end justify-center px-4 md:px-8 z-20 pb-0 mt-4 md:mt-12">
-                <div className="relative w-full max-w-[1200px] bg-white/20 backdrop-blur-md border border-white/40 border-b-0 rounded-t-[2rem] md:rounded-t-[2.5rem] rounded-b-none p-4 md:p-8 pb-0 shadow-xl h-full flex flex-col justify-center">
+            <div className="flex-grow flex items-end justify-center px-4 md:px-8 z-20 pb-0 mt-2 md:mt-12 mb-8 md:mb-0">
+                <div className="relative w-full max-w-[1200px] bg-white/20 backdrop-blur-md border border-white/40 border-b-0 rounded-t-[2rem] md:rounded-t-[2.5rem] rounded-b-[2rem] md:rounded-b-none p-4 md:p-8 pb-0 shadow-xl h-full flex flex-col justify-center">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 h-full">
                         {/* Mission Card */}
-                        <div className="bg-white/60 rounded-t-[1.5rem] md:rounded-t-[2rem] rounded-b-none p-4 md:p-12 pb-4 md:pb-40 flex flex-col justify-start pt-6 md:pt-16 gap-2 md:gap-3 shadow-inner h-full">
-                            <h3 className={`${inter.className} text-[#5E4175] text-xl md:text-5xl lg:text-5xl font-bold lowercase tracking-tight`}>our mission</h3>
-                            <p className={`${inter.className} text-[#4F3457] text-xs md:text-sm lg:text-lg leading-relaxed`}>
+                        <div className="bg-white/60 rounded-t-[1.5rem] md:rounded-t-[2rem] rounded-b-[1.5rem] md:rounded-b-none p-4 md:p-12 pb-4 md:pb-40 flex flex-col justify-start pt-6 md:pt-16 gap-2 md:gap-3 shadow-inner h-full">
+                            <h3 className={`${inter.className} text-[#5E4175] text-xl min-[400px]:text-2xl md:text-5xl lg:text-5xl font-bold lowercase tracking-tight`}>our mission</h3>
+                            <p className={`${inter.className} text-[#4F3457] text-xs min-[400px]:text-sm md:text-sm lg:text-lg leading-relaxed`}>
                                 To build a safe and founder-led space where young entrepreneurs feel <strong>supported</strong>, <strong>connected</strong>, and <strong>empowered</strong> to experiment, fail, and grow - together, because if you're an ambitious young founder, you deserve the same support as anyone else.
                             </p>
                         </div>
 
                         {/* Vision Card */}
-                        <div className="bg-white/60 rounded-t-[1.5rem] md:rounded-t-[2rem] rounded-b-none p-4 md:p-12 pb-4 md:pb-40 flex flex-col justify-start pt-6 md:pt-16 gap-2 md:gap-3 shadow-inner h-full">
-                            <h3 className={`${inter.className} text-[#5E4175] text-xl md:text-5xl lg:text-5xl font-bold lowercase tracking-tight text-left md:text-right`}>our vision</h3>
-                            <p className={`${inter.className} text-[#4F3457] text-xs md:text-sm lg:text-lg leading-relaxed text-left md:text-right`}>
+                        <div className="bg-white/60 rounded-t-[1.5rem] md:rounded-t-[2rem] rounded-b-[1.5rem] md:rounded-b-none p-4 md:p-12 pb-4 md:pb-40 flex flex-col justify-start pt-6 md:pt-16 gap-2 md:gap-3 shadow-inner h-full">
+                            <h3 className={`${inter.className} text-[#5E4175] text-xl min-[400px]:text-2xl md:text-5xl lg:text-5xl font-bold lowercase tracking-tight text-left md:text-right`}>our vision</h3>
+                            <p className={`${inter.className} text-[#4F3457] text-xs min-[400px]:text-sm md:text-sm lg:text-lg leading-relaxed text-left md:text-right`}>
                                 To <strong>redefine</strong> what it means to build a startup, not in isolation, but <strong>in community</strong>.
                             </p>
                         </div>

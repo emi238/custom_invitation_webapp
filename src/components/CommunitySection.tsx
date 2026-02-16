@@ -121,8 +121,10 @@ export default function CommunitySection() {
         const handleResize = () => {
             if (window.innerWidth < 768) {
                 setLayout(LAYOUT_MOBILE);
+                setAutoScrollSpeed(0.1);
             } else {
                 setLayout(LAYOUT_DESKTOP);
+                setAutoScrollSpeed(0);
             }
         };
         // Initial check
@@ -151,22 +153,35 @@ export default function CommunitySection() {
                 const item0Angle = startAngle + currentRotation;
                 const itemLastAngle = startAngle + totalSpread + currentRotation;
 
-                // Bounds derived from "stop at edges of final polaroid"
-                // Visible range is approx -135 to -45.
+                // Bounds
                 // Stop scrolling Right (bringing left items in) if FirstItem is at left edge (-105)
                 // Stop scrolling Left (bringing right items in) if LastItem is at right edge (-75)
 
-                if (step > 0) { // Rotating Clockwise (Moving content Right)
-                    if (item0Angle < -105) rotation.set(currentRotation + step);
-                } else { // Rotating Counter-Clockwise (Moving content Left)
-                    if (itemLastAngle > -75) rotation.set(currentRotation + step);
+                if (step > 0) { // Moving Right
+                    if (item0Angle < -105) {
+                        rotation.set(currentRotation + step);
+                    } else {
+                        // Hit Left Limit
+                        if (window.innerWidth < 768) {
+                            setAutoScrollSpeed(s => -Math.abs(s)); // Reverse
+                        }
+                    }
+                } else { // Moving Left
+                    if (itemLastAngle > -75) {
+                        rotation.set(currentRotation + step);
+                    } else {
+                        // Hit Right Limit
+                        if (window.innerWidth < 768) {
+                            setAutoScrollSpeed(s => Math.abs(s)); // Reverse
+                        }
+                    }
                 }
             }
             frameId = requestAnimationFrame(loop);
         };
         frameId = requestAnimationFrame(loop);
         return () => cancelAnimationFrame(frameId);
-    }, [autoScrollSpeed, photos.length, layout.ANGLE_STEP]); // Added layout dep
+    }, [autoScrollSpeed, photos.length, layout.ANGLE_STEP]);
 
     // Fallback static cards
     const staticPolaroids = Array(5).fill(null).map((_, i) => ({
@@ -230,6 +245,10 @@ export default function CommunitySection() {
     }
 
     const handleMouseMove = (e: React.MouseEvent) => {
+        // Disable mouse interaction scroll on mobile logic if we want strictly auto-scroll
+        // But for hybrid, we check width
+        if (window.innerWidth < 768) return;
+
         const { clientX, currentTarget } = e;
         const width = currentTarget.clientWidth;
         const x = clientX - currentTarget.getBoundingClientRect().left;
@@ -251,6 +270,7 @@ export default function CommunitySection() {
     }
 
     const handleMouseLeave = () => {
+        if (window.innerWidth < 768) return; // Don't stop auto-scroll on mobile
         setAutoScrollSpeed(0);
     }
 
@@ -275,7 +295,7 @@ export default function CommunitySection() {
 
             <div className="relative z-10 flex flex-col items-center justify-between h-full py-12 w-full max-w-[95%]">
                 <div className="mt-10 md:mt-35 z-20">
-                    <h2 className={`${inter.className} font-bold text-[#4F3457] text-4xl md:text-5xl text-center lowercase tracking-tight`}>
+                    <h2 className={`${inter.className} font-bold text-[#4F3457] text-2xl md:text-5xl text-center lowercase tracking-tight`}>
                         our community of young founders
                     </h2>
                 </div>
