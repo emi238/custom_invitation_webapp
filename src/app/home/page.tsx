@@ -35,17 +35,16 @@ export default function Home() {
                 <div className="relative z-10 w-full h-full flex flex-col justify-between">
 
                     {/* Definition Section - Top Right Area (With Padding) */}
-                    <div className="flex justify-end mt-24 md:mt-32 w-full p-6 md:p-12">
+                    <div className="flex justify-end mt-26 md:mt-32 w-full p-6 md:p-12">
                         <div className="w-1/2 md:w-auto md:max-w-md text-right flex flex-col items-end gap-2">
                             <h2
-                                className="text-lg md:text-3xl font-bold font-sans"
+                                className="text-md md:text-3xl font-bold font-sans"
                                 style={{ color: '#4F3457' }}
                             >
                                 /hʌɪfiː/ — noun, plural
                             </h2>
                             <p
-                                className="text-xs md:text-xl font-medium leading-relaxed font-sans"
-                                style={{ color: 'rgba(226, 210, 235, 0.7)' }}
+                                className="text-[13px] md:text-xl font-medium leading-tight md:leading-relaxed font-sans text-[rgba(226,210,235,0.8)] md:text-[rgba(226,210,235,0.7)] max-w-[calc(100%-65px)] md:max-w-full"
                             >
                                 The branching filamentous structures of a fungus that form an underground network,
                                 connecting and nourishing entire ecosystems. It is invisible to the eye, but essential
