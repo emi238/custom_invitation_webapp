@@ -25,7 +25,7 @@ export default function Home() {
                     />
                     {/* Desktop Image */}
                     <img
-                        src="/hero_image.png"
+                        src="/hero_image_copy.png"
                         alt="Hero Background Desktop"
                         className="absolute inset-0 w-full h-full object-cover object-top hidden md:block"
                     />
@@ -56,7 +56,7 @@ export default function Home() {
                     {/* Main Title - Bottom (No Padding, Left Aligned) */}
                     <div className="w-full mt-auto mb-0 md:mb-2">
                         <h1
-                            className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left md:-mb-[1vh]"
+                            className="font-bold leading-none tracking-tighter w-full font-sans uppercase whitespace-nowrap text-left md:-mb-[5vh]"
                             style={{
                                 color: 'rgba(226, 210, 235, 0.8)',
                                 fontSize: '15vw',
