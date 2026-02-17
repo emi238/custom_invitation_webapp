@@ -167,53 +167,41 @@ export default function EventsSection() {
                                             {event && (
                                                 <div
                                                     className="absolute inset-0 m-0.5 cursor-pointer group/wrapper z-10 peer"
-                                                    onMouseEnter={() => setHoveredEventId(event.id)}
-                                                    onMouseLeave={() => setHoveredEventId(null)}
-                                                    onClick={() => setHoveredEventId(event.id)}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedEvent(event);
+                                                    }}
                                                 >
-                                                    <div
-                                                        className="relative w-full h-full rounded-sm shadow-sm opacity-100 hover:scale-[1.02] transition-all duration-300"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            if (window.innerWidth < 768) {
-                                                                setHoveredEventId(null)
-                                                            }
-                                                        }}
-                                                    >
+                                                    <div className="relative w-full h-full rounded-sm shadow-sm opacity-100 hover:scale-[1.02] transition-all duration-300">
                                                         <Image
                                                             src={event.photo_url}
                                                             alt={event.event_title}
                                                             fill
                                                             className="object-cover rounded-sm"
                                                         />
-                                                        {/* Mobile Tap Overlay */}
-                                                        <div
-                                                            className="absolute inset-0 z-30 md:hidden"
-                                                            onClick={() => setSelectedEvent(event)}
-                                                        ></div>
-                                                    </div>
 
-                                                    {/* Hover Overlay - Desktop Only */}
-                                                    <div
-                                                        className="hidden md:flex absolute inset-0 bg-[#E6DDD8] backdrop-blur-md p-2 flex-col justify-center gap-1 transition-all duration-300 rounded-sm overflow-hidden opacity-0 group-hover/wrapper:opacity-100 pointer-events-none group-hover/wrapper:pointer-events-auto"
-                                                    >
-                                                        <div className="shrink-0 w-full">
-                                                            <h4 className={`${inter.className} text-[#4F3457] font-bold text-sm md:text-base leading-tight line-clamp-2`}>
-                                                                {event.event_title}
-                                                            </h4>
-                                                        </div>
-                                                        <div className="flex flex-col gap-0.5 mt-1">
-                                                            <p className={`${inter.className} text-[#4F3457] text-xs font-medium`}>
-                                                                {formatDateWithSuffix(new Date(event.event_timestamp))}
-                                                            </p>
-                                                            <p className={`${inter.className} text-[#4F3457] text-xs`}>
-                                                                {timeString}
-                                                            </p>
-                                                            {event.address && (
-                                                                <p className={`${inter.className} text-[#4F3457] text-xs text-wrap mt-1`}>
-                                                                    {event.address}
+                                                        {/* Hover Overlay - Desktop Only */}
+                                                        <div
+                                                            className="hidden md:flex absolute inset-0 bg-[#E6DDD8]/90 backdrop-blur-md p-2 flex-col justify-center gap-1 transition-all duration-300 rounded-sm overflow-hidden opacity-0 group-hover/wrapper:opacity-100"
+                                                        >
+                                                            <div className="shrink-0 w-full">
+                                                                <h4 className={`${inter.className} text-[#4F3457] font-bold text-sm md:text-base leading-tight line-clamp-2`}>
+                                                                    {event.event_title}
+                                                                </h4>
+                                                            </div>
+                                                            <div className="flex flex-col gap-0.5 mt-1">
+                                                                <p className={`${inter.className} text-[#4F3457] text-xs font-medium`}>
+                                                                    {formatDateWithSuffix(new Date(event.event_timestamp))}
                                                                 </p>
-                                                            )}
+                                                                <p className={`${inter.className} text-[#4F3457] text-xs`}>
+                                                                    {timeString}
+                                                                </p>
+                                                                {event.address && (
+                                                                    <p className={`${inter.className} text-[#4F3457] text-xs text-wrap mt-1`}>
+                                                                        {event.address}
+                                                                    </p>
+                                                                )}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -231,9 +219,9 @@ export default function EventsSection() {
                 </div>
             </div>
 
-            {/* Mobile Event Details Modal */}
+            {/* Event Details Modal */}
             {selectedEvent && (
-                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedEvent(null)}>
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-white/10 backdrop-blur-md" onClick={() => setSelectedEvent(null)}>
                     <div
                         className="bg-[#FFFFFF] w-full max-w-md rounded-2xl overflow-hidden shadow-2xl flex flex-col relative animate-in fade-in zoom-in duration-200"
                         onClick={(e) => e.stopPropagation()}
