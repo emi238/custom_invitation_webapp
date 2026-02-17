@@ -224,15 +224,15 @@ export default function PolaroidGallery() {
                 >
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-xs rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-white/30"></div>
 
-                    <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-2">
+                    <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-1">
                         <h2 className={`${inter.className} font-bold text-[#5E4175] text-2xl md:text-7xl leading-none tracking-tight`}>
                             who we are
                         </h2>
-                        <p className={`${inter.className} font-medium text-[#4F3457] text-sm md:text-xl leading-relaxed max-w-[60%] mx-auto`}>
+                        <p className={`${inter.className} font-medium text-[#4F3457] text-sm md:text-lg leading-relaxed max-w-[60%] mx-auto`}>
                             Hyphae is a founder-first social community for young
-                            founders across Queensland. We connect ambitious
-                            entrepreneurs not by university or experience but by hunger
-                            and commitment.
+                            founders across Queensland. We bring together Queensland's hungriest young founders for one reason:
+                            building startups is better with friends. Here, we're creating the support system where you cross-polinate ideas, welcome feedback, celebrate wins, and the failures.
+                            Startup life is hard. We make it fun, because the best startups are built with a community that's got your back.
                         </p>
                     </div>
                 </motion.div>
