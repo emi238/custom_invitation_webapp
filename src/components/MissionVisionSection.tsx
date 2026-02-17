@@ -43,7 +43,7 @@ export default function MissionVisionSection() {
                         <div className="bg-white/60 rounded-t-[1.5rem] md:rounded-t-[2rem] rounded-b-[1.5rem] md:rounded-b-none p-4 md:p-12 pb-4 md:pb-40 flex flex-col justify-start pt-6 md:pt-16 gap-2 md:gap-3 shadow-inner h-full">
                             <h3 className={`${inter.className} text-[#5E4175] text-2xl md:text-5xl lg:text-5xl font-bold lowercase tracking-tight`}>our mission</h3>
                             <p className={`${inter.className} text-[#4F3457] text-sm md:text-sm lg:text-lg leading-relaxed`}>
-                                To build a safe and founder-led space where young entrepreneurs feel <strong>supported</strong>, <strong>connected</strong>, and <strong>empowered</strong> to experiment, fail, and grow - together, because if you're an ambitious young founder, you deserve the same support as anyone else.
+                                To build a safe and founder-led space where young entrepreneurs feel <strong>supported</strong>, <strong>connected</strong>, and <strong>empowered</strong> to experiment, fail, and grow - together, because you shouldn't have to build alone.
                             </p>
                         </div>
 
