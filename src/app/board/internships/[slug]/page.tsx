@@ -157,7 +157,7 @@ export default async function InternshipDetailPage(props: { params: Promise<{ sl
 
                         <div className="mt-16 text-center">
                             <p className="text-[#4F3457]/60 mb-2">
-                                If you are interested, Send your resume along with a short introduction of yourself to our email
+                                If you are interested, Send your resume along with a short introduction of yourself to our email/form:
                             </p>
                             <a
                                 href={post.contact_details.includes('@') ? `mailto:${post.contact_details}` : post.contact_details}
@@ -165,7 +165,7 @@ export default async function InternshipDetailPage(props: { params: Promise<{ sl
                             >
                                 {post.contact_details}
                             </a>
-                            <p className="text-[#4F3457]/60 mt-1">or message us on linkedin.</p>
+                            <p className="text-[#4F3457]/60 mt-1">or message us on linkedin!</p>
                         </div>
                     </div>
                 </div>

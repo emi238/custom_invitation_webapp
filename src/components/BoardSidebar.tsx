@@ -16,24 +16,24 @@ export default function BoardSidebar() {
     const pathname = usePathname()
 
     return (
-        <aside className="w-full md:w-64 flex-shrink-0 flex flex-col gap-2">
+        <aside className="w-full md:w-64 flex-shrink-0 flex flex-row md:flex-col justify-between md:justify-start gap-0 md:gap-2 pb-0 md:pb-0">
             {navItems.map((item) => {
-                const isActive = pathname === item.href
+                const isActive = pathname === item.href || (item.href !== '/board' && pathname.startsWith(item.href))
 
                 return (
                     <Link
                         key={item.href}
                         href={item.href}
-                        className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all font-medium text-sm md:text-base
+                        className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-0.5 md:gap-3 px-0 md:px-6 py-2 md:py-3 rounded-xl transition-all font-medium flex-1 md:flex-none
                             ${isActive
-                                ? 'bg-white shadow-md text-[#4F3457] font-bold'
+                                ? 'bg-white/40 md:bg-white shadow-sm md:shadow-md text-[#4F3457] font-bold'
                                 : 'text-[#4F3457]/70 hover:bg-white/50 hover:text-[#4F3457]'
                             }`}
                     >
-                        <div className={`p-2 rounded-lg ${isActive ? 'bg-[#4F3457]/10' : 'bg-transparent'}`}>
-                            <item.icon size={20} />
+                        <div className={`p-1.5 md:p-2 rounded-lg ${isActive ? 'bg-[#4F3457]/10' : 'bg-transparent'}`}>
+                            <item.icon className="w-5 h-5 md:w-5 md:h-5" />
                         </div>
-                        {item.name}
+                        <span className={`${isActive ? 'block' : 'hidden'} md:block capitalize text-[9px] md:text-base leading-none text-center md:text-left`}>{item.name}</span>
                     </Link>
                 )
             })}
