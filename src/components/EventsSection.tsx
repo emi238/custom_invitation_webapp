@@ -16,13 +16,11 @@ interface EventInfo {
 }
 
 export default function EventsSection() {
-    // Default to January 2026
     const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1))
     const [events, setEvents] = useState<EventInfo[]>([])
     const [hoveredEventId, setHoveredEventId] = useState<string | null>(null)
     const [selectedEvent, setSelectedEvent] = useState<EventInfo | null>(null)
 
-    // Fetch events from Supabase
     useEffect(() => {
         const fetchEvents = async () => {
             try {
@@ -237,7 +235,7 @@ export default function EventsSection() {
             {selectedEvent && (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedEvent(null)}>
                     <div
-                        className="bg-[#FFF5EB] w-full max-w-md rounded-2xl overflow-hidden shadow-2xl flex flex-col relative animate-in fade-in zoom-in duration-200"
+                        className="bg-[#FFFFFF] w-full max-w-md rounded-2xl overflow-hidden shadow-2xl flex flex-col relative animate-in fade-in zoom-in duration-200"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
