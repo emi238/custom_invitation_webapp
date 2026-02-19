@@ -67,7 +67,7 @@ function Polaroid({ src, caption, rotation, x, y, mx, my, ex, ey, emx, emy, dela
                 damping: 12,
                 delay: delay * 0.15
             }}
-            className="absolute w-24 md:w-40 lg:w-70 overflow-visible transform hover:scale-110 hover:z-50 transition-all duration-300 ease-out cursor-pointer origin-center"
+            className="absolute w-24 md:w-40 lg:w-48 overflow-visible transform hover:scale-110 hover:z-50 transition-all duration-300 ease-out cursor-pointer origin-center"
             style={{
                 rotate: `${rotation}deg`,
                 zIndex: 10,
